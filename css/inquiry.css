@@ -1,0 +1,144 @@
+/* index의 :root/리셋/네비/히어로는 style.css 사용 */
+/* 문의 페이지 전용 스타일만 정의 */
+
+.logo-banner{ background:#000; padding:32px 0; display:flex; justify-content:center; align-items:center }
+.logo-banner img{ max-width:150px; width:100%; height:auto }
+
+.bar-title{ display:block; width:100%; background:#000; color:#fff; font-size:18px; font-weight:800; line-height:1.25; letter-spacing:.2px; padding:clamp(12px, 2.5vw, 16px) 0; margin:0; text-align:center }
+
+.wrap{ max-width:var(--maxw); margin: 32px auto var(--y); padding:0 var(--x) }
+.panel{ background:#fafafa; border:1px solid #eee; border-radius:0; padding:clamp(22px,3.2vw,32px) }
+
+/* Form layout */
+form{ display:grid; gap:24px; font-size:var(--fs-base,16px) }
+.grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px 24px }
+@media(max-width:720px){ .grid{ grid-template-columns:1fr; gap:20px } }
+
+label{ display:block; font-weight:700; font-size:15px; margin:0 0 10px; line-height:1.4; text-align:left; }
+.req::after{ content:" *"; color:#c00 }
+
+/* Inputs */
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+input[type="number"], input[type="date"], select {
+  width:100%; height:var(--field-h,40px); border:1px solid #ddd; border-radius:var(--radius,10px);
+  padding:0 12px; font-size:14px; line-height:1.4; background:#fff;
+}
+textarea{ width:100%; min-height:160px; border:1px solid #ddd; border-radius:var(--radius,10px); padding:12px; font-size:15px; line-height:1.5; background:#fff }
+select{ appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:none !important; padding-right:12px }
+select::-ms-expand{ display:none }
+
+/* Chips */
+.choices{ display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:6px }
+.chip{ display:inline-flex; align-items:center; gap:6px; padding:8px 10px; border:0; border-radius:999px; background:#f5f5f5; font-size:14px; font-weight:500; cursor:pointer; user-select:none; position:relative }
+.chip input{ accent-color:#000 }
+.chip:hover{ background:#eee }
+
+.help{ font-size:var(--fs-help,12px); color:#666; margin-top:8px }
+.error{ font-size:var(--fs-help,12px); color:#c00; margin-top:8px; display:none }
+.invalid input, .invalid textarea, .invalid select{ border-color:#c00; outline-color:#c00 }
+
+.actions{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:flex-end; margin-top:4px }
+button[type="submit"]{ padding:12px 16px; border:1px solid #000; background:#000; color:#fff; border-radius:var(--radius,10px); font-weight:800; font-size:14px; line-height:1.4; cursor:pointer }
+button[type="submit"]:hover{ opacity:.9 }
+.ghost{ padding:12px 16px; border:1px solid #000; border-radius:var(--radius,10px); background:#fff; font-weight:700; font-size:14px; line-height:1.4 }
+.ghost:hover{ background:#000; color:#fff }
+@media (max-width:720px){ .actions{ justify-content:center } }
+
+.success{ display:none; background:#f0fff0; border:1px solid #b6e7b6; color:#225522; padding:12px 14px; border-radius:var(--radius,10px); font-size:14px; text-align:center }
+
+/* 컬러칩/HEX */
+.mc{ display:flex; width:18px; height:18px; overflow:hidden; border-radius:0; }
+.mc > span{ flex:1 1 0; height:100%; margin:0; border:none; }
+#colorTone.condense label.chip:nth-child(n+7){ display:none; } /* 6개만 노출 */
+#colorToneToggle {
+  display: block;        
+  width: fit-content;    
+  margin-top: 2px;       
+  margin-left: 15px;      /* ← 살짝 들여쓰기 (4~8px 범위에서 조절 가능) */
+  text-align: left;      
+  font-size: 12px;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+.swatch{ display:inline-block; width:20px; height:20px; border-radius:4px; border:1px solid #ddd; margin-right:6px; flex-shrink:0 }
+.inline-controls{
+  display:flex;
+  align-items:center;   /* 세로 가운데 */
+  gap:8px;
+  margin-top:8px;
+}
+
+.inline-controls label{
+  margin:0;             /* ← label 기본 margin-bottom:10px 제거 */
+  line-height:1;        /* 텍스트 박스 높이 과도한 여백 제거 */
+  display:flex;
+  align-items:center;   /* 폰트 x-height 기준 중앙 */
+}
+
+/* 스와치/입력 높이 통일(취향껏 조절 28~34px) */
+.inline-controls input[type="color"]{
+  width:28px;
+  height:28px;
+  border:0;
+  border-radius:0;
+  padding:0;
+}
+
+/* 오른쪽 HEX 텍스트 입력도 높이 맞춤(선택) */
+.inline-controls #customHex{
+  height:32px;          /* 폼 전체 톤에 맞게 32~34px */
+  padding:0 12px;
+}
+/* 칩 툴팁 */
+.chip .tooltip{
+  position:absolute; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.88); color:#fff;
+  padding:6px 10px; border-radius:6px; font-size:12px; line-height:1.4; white-space:nowrap; z-index:20;
+  opacity:0; pointer-events:none; transition:opacity .15s ease;
+}
+.chip.show-tooltip .tooltip{ opacity:1; pointer-events:auto }
+.chip .tooltip.top{ bottom:120% }
+.chip .tooltip.bottom{ top:120% }
+
+/* 모달 */
+.privacy-modal[aria-hidden="true"]{ display:none; }
+.privacy-modal[aria-hidden="false"]{ display:block; }
+.privacy-modal__backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.55); }
+.privacy-modal__panel{
+  position:fixed; inset:0; margin:auto; width:auto; height:auto;
+  max-width:min(560px, calc(100% - 32px)); max-height:80vh; overflow:hidden; background:#fff;
+  border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,.25); display:flex; flex-direction:column;
+  transform:translateY(8px); opacity:0; animation:modal-in .18s ease-out forwards;
+}
+.privacy-modal__header,
+.privacy-modal__body,
+.privacy-modal__footer { text-align:left; }
+
+/* '자세히 보기' 버튼: 체크박스 텍스트 밑으로 들여쓰기 */
+#privacyOpen{
+  display:block;
+  margin:6px 0 0 28px; /* 필요 시 24~32px 범위에서 미세조정 */
+  text-align:left;
+  font-size:13px;
+}
+
+@keyframes modal-in{ to{ transform:none; opacity:1; } }
+
+.privacy-modal__header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 18px; border-bottom:1px solid #eef0f3;
+}
+.privacy-modal__header h2{ font-size:18px; margin:0; }
+.privacy-modal__close{ border:none; background:transparent; font-size:18px; cursor:pointer; line-height:1; }
+.privacy-modal__body{ padding:16px 18px; overflow:auto; font-size:14px; color:#222; line-height:1.7; }
+.privacy-modal__body p{ margin:0 0 12px; }
+.privacy-modal__footer{
+  padding:12px 18px; border-top:1px solid #eef0f3;
+  display:flex; justify-content:center; gap:8px;
+}
+
+/* 문장 줄바꿈 품질 (유지해도 무방) */
+html, body { word-break: keep-all; }
+p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap:anywhere }

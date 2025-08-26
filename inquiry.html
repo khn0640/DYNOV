@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>견적 문의 · 디노브(DYNOV)</title>
+  <meta name="description" content="프레젠테이션·마케팅 비주얼·브랜딩 제작 견적 문의" />
+  <meta property="og:image" content="images/og-cover.png" />
+  <link rel="icon" href="images/favicon.png" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- 공통 스타일 + 문의 전용 -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/inquiry.css" />
+</head>
+<body>
+  <a href="#inquiry" class="skip">본문으로 건너뛰기</a>
+
+  <nav class="nav" aria-label="주요 내비게이션">
+    <a class="brand" href="index.html#top" aria-label="DYNOV 홈">
+      <img src="images/slogun.svg" alt="슬로건">
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기/닫기" aria-expanded="false">☰</button>
+    <div class="nav-links" role="navigation">
+      <a href="index.html#portfolio" class="link">포트폴리오</a>
+      <a href="index.html#process" class="link">프로세스</a>
+      <a href="index.html#guide" class="link">의뢰가이드</a>
+      <a href="index.html#faq" class="link">FAQ</a>
+      <a class="cta" href="inquiry.html" rel="noopener noreferrer">견적 문의</a>
+    </div>
+    <!-- 모바일 오버레이 (main.js와 호환) -->
+    <div class="nav-overlay" aria-hidden="true"></div>
+  </nav>
+
+  <!-- 상단 로고 밴드 -->
+  <div class="logo-banner" aria-hidden="true">
+    <img src="images/DYNOV_logo1.svg" alt="DYNOV" width="220" height="60">
+  </div>
+
+  <header class="hero" role="banner">
+    <div class="kicker">AI 기반, 효율적 프로세스와 높은 완성도</div>
+    <h1 class="title">견적 문의</h1>
+    <p class="sub">간단한 아이디어만 있어도 괜찮습니다. 목적과 메시지에 맞춘 형태로 빠르게 제안드립니다.</p>
+  </header>
+
+  <main id="inquiry" class="wrap" aria-label="견적 문의 양식">
+    <h2 class="bar-title">프로젝트 정보</h2>
+    <div class="panel">
+      <form id="inquiryForm" novalidate>
+        <div class="grid">
+          <div>
+            <label class="req" for="projectType">프로젝트 유형</label>
+            <div class="choices" id="projectType" role="group" aria-label="프로젝트 유형">
+              <label class="chip">
+                <input type="checkbox" name="type" value="presentation">
+                프레젠테이션
+                <div class="tooltip top">기획·디자인 포함 맞춤 발표자료 (기업/IR/세일즈 등)</div>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="type" value="marketing">
+                마케팅 디자인
+                <div class="tooltip top">배너·카드뉴스·SNS·랜딩용 소재 등 캠페인 제작</div>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="type" value="branding">
+                브랜딩
+                <div class="tooltip top">로고·키비주얼·가이드·타이포/컬러 시스템</div>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="type" value="package">
+                패키지
+                <div class="tooltip top">제품 패키지·라벨·인쇄물·굿즈</div>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="type" value="3d">
+                3D 비주얼
+                <div class="tooltip top">제품/공간 3D 모델링·렌더·합성</div>
+              </label>
+              <label class="chip">
+                <input type="checkbox" name="type" value="2d">
+                키 비주얼
+                <div class="tooltip top">광고/캠페인 메인 비주얼 및 응용</div>
+              </label>
+            </div>
+            <p class="help">※ 중복 선택이 가능합니다.</p>
+          </div>
+
+          <div>
+            <label for="pages">예상 분량</label>
+            <input id="pages" name="pages" type="text" placeholder="예: 프레젠테이션 20p / 배너 5종" />
+          </div>
+        </div>
+
+        <div>
+          <label class="req" for="scope">의뢰 범위/요청사항</label>
+          <textarea id="scope" name="scope" placeholder="페이지 구조, 최신 원고, 포함 데이터/이미지, 필요한 산출물"></textarea>
+          <div class="error" data-for="scope">의뢰 범위를 간단히라도 작성해 주세요.</div>
+        </div>
+
+        <div>
+          <label for="toneMood">톤 & 무드 <span class="help">최대 2개까지 선택</span></label>
+          <div class="choices" id="toneMood" role="group" aria-label="톤앤무드 선택">
+            <label class="chip"><input type="checkbox" name="toneMood" value="minimal_clean"> 미니멀 / 클린</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="modern_simple"> 모던 / 심플</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="premium_luxury"> 프리미엄 / 럭셔리</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="friendly"> 친근한</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="dynamic"> 다이내믹</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="unique"> 유니크</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="retro"> 레트로</label>
+            <label class="chip"><input type="checkbox" name="toneMood" value="unsure"> 잘 모르겠어요(추천받기)</label>
+          </div>
+        </div>
+
+        <!-- Preferred Color -->
+        <div>
+          <label for="colorTone">선호 컬러 (이미지 톤) <span class="help">단일 선택</span></label>
+          <div class="choices condense" id="colorTone" role="group" aria-label="선호 컬러(이미지 톤)">
+            <!-- (기존 라벨들 그대로) -->
+            <label class="chip"><input type="radio" name="colorTone" value="modern"><div class="mc"><span style="background:#000000"></span><span style="background:#666666"></span><span style="background:#FFFFFF"></span></div>모던한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="cute"><div class="mc"><span style="background:#FFE6E6"></span><span style="background:#FFF4B2"></span><span style="background:#E6F2FF"></span></div>귀여운</label>
+            <label class="chip"><input type="radio" name="colorTone" value="natural"><div class="mc"><span style="background:#6FBF73"></span><span style="background:#A5D6A7"></span><span style="background:#C8E6C9"></span></div>내추럴한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="clean"><div class="mc"><span style="background:#FFFFFF"></span><span style="background:#E3F2FD"></span><span style="background:#F1F8E9"></span></div>깨끗한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="fancy"><div class="mc"><span style="background:#FF2D7A"></span><span style="background:#8E44AD"></span><span style="background:#FFC300"></span></div>화려한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="elegant"><div class="mc"><span style="background:#C8B6A6"></span><span style="background:#EADBC8"></span><span style="background:#B08968"></span></div>우아한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="dignified"><div class="mc"><span style="background:#2F3A46"></span><span style="background:#455A64"></span><span style="background:#263238"></span></div>점잖은</label>
+            <label class="chip"><input type="radio" name="colorTone" value="noble"><div class="mc"><span style="background:#3E2723"></span><span style="background:#1B5E20"></span><span style="background:#4E342E"></span></div>고상한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="mild"><div class="mc"><span style="background:#E6E6FA"></span><span style="background:#F8BBD0"></span><span style="background:#FFE0B2"></span></div>온화한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="subtle"><div class="mc"><span style="background:#CFD8DC"></span><span style="background:#D7CCC8"></span><span style="background:#B0BEC5"></span></div>은은한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="cheerful"><div class="mc"><span style="background:#FF8A00"></span><span style="background:#FFD200"></span><span style="background:#FF3D00"></span></div>경쾌한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="dynamic"><div class="mc"><span style="background:#FF6B00"></span><span style="background:#0066FF"></span><span style="background:#00C2FF"></span></div>다이내믹한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="romantic"><div class="mc"><span style="background:#F8BBD0"></span><span style="background:#FFDDEB"></span><span style="background:#FFCDD2"></span></div>로맨틱한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="luxury"><div class="mc"><span style="background:#4A148C"></span><span style="background:#311B92"></span><span style="background:#1A237E"></span></div>럭셔리한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="fresh"><div class="mc"><span style="background:#64FFDA"></span><span style="background:#1DE9B6"></span><span style="background:#00BFA5"></span></div>상쾌한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="calm"><div class="mc"><span style="background:#BBDEFB"></span><span style="background:#90CAF9"></span><span style="background:#64B5F6"></span></div>차분한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="warm"><div class="mc"><span style="background:#FFCC80"></span><span style="background:#FFB74D"></span><span style="background:#FFA726"></span></div>따뜻한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="cool"><div class="mc"><span style="background:#B3E5FC"></span><span style="background:#81D4FA"></span><span style="background:#4FC3F7"></span></div>시원한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="classic"><div class="mc"><span style="background:#3E2723"></span><span style="background:#5D4037"></span><span style="background:#795548"></span></div>클래식한</label>
+            <label class="chip"><input type="radio" name="colorTone" value="vivid"><div class="mc"><span style="background:#FF1744"></span><span style="background:#FF9100"></span><span style="background:#00E5FF"></span></div>선명한</label>
+          </div>
+          <button type="button" id="colorToneToggle" aria-controls="colorTone" aria-expanded="false">더보기</button>
+
+          <div class="inline-controls">
+            <label for="customHex" style="font-weight:700; font-size:14px;">HEX</label>
+            <input type="color" id="customHexPicker" value="#000000">
+            <input type="text" id="customHex" name="customHex" placeholder="#000000" maxlength="7">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="budget">예산 범위</label>
+            <select id="budget" name="budget">
+              <option value="">선택</option>
+              <option value="under1m">100만원 이하</option>
+              <option value="1to3m">100~300만원</option>
+              <option value="3to5m">300~500만원</option>
+              <option value="over5m">500만원 이상</option>
+              <option value="more">기타</option>
+            </select>
+          </div>
+          <div>
+            <label for="due">희망 일정</label>
+            <input id="due" name="due" type="date" />
+          </div>
+        </div>
+
+        <div>
+          <label for="fast">진행 속도</label>
+          <div class="choices" id="fast">
+            <label class="chip"><input type="radio" name="fast" value="no" checked> 일반</label>
+            <label class="chip"><input type="radio" name="fast" value="yes"> 신속(별도 협의)</label>
+          </div>
+        </div>
+
+        <div>
+          <label for="deliverables">납품 형식</label>
+          <div class="choices" id="deliverables">
+            <label class="chip"><input type="checkbox" name="deliverables" value="ppt"> PPT</label>
+            <label class="chip"><input type="checkbox" name="deliverables" value="pdf"> PDF</label>
+            <label class="chip"><input type="checkbox" name="deliverables" value="jpg"> JPG</label>
+            <label class="chip"><input type="checkbox" name="deliverables" value="png"> PNG</label>
+            <label class="chip"><input type="checkbox" name="deliverables" value="source"> 원본 편집 파일(협의)</label>
+            <label class="chip"><input type="checkbox" name="deliverables" value="template"> 템플릿/스타일 가이드</label>
+          </div>
+          <p class="help">※ 중복 선택이 가능합니다.</p>
+        </div>
+
+        <h2 class="bar-title" style="margin-top: var(--y);">연락처</h2>
+        <div class="grid">
+          <div>
+            <label class="req" for="name">이름</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="홍길동" />
+            <div class="error" data-for="name">이름을 입력해 주세요.</div>
+          </div>
+          <div>
+            <label for="company">회사/팀 (선택)</label>
+            <input id="company" name="company" type="text" placeholder="회사명 또는 팀명" />
+          </div>
+          <div>
+            <label class="req" for="email">이메일</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+            <div class="error" data-for="email">올바른 이메일을 입력해 주세요.</div>
+          </div>
+          <div>
+            <label class="req" for="phone">연락처</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" />
+            <div class="error" data-for="phone">연락처를 입력해 주세요.</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="contactPref">연락 선호</label>
+            <div class="choices" id="contactPref">
+              <label class="chip"><input type="radio" name="contactPref" value="email" checked> 이메일</label>
+              <label class="chip"><input type="radio" name="contactPref" value="phone"> 전화</label>
+              <label class="chip"><input type="radio" name="contactPref" value="kakao"> 카카오톡</label>
+            </div>
+          </div>
+          <div>
+            <label for="contactTime">가능 시간대 (선택)</label>
+            <input id="contactTime" name="contactTime" type="text" placeholder="예: 평일 13:00–18:00" />
+          </div>
+        </div>
+
+        <div>
+          <label for="link">자료 링크 (선택)</label>
+          <input id="link" name="link" type="url" placeholder="https:// (구글드라이브/노션/웹사이트 등)" />
+        </div>
+
+        <div>
+          <label for="ref">유입 경로 (선택)</label>
+          <select id="ref" name="ref">
+            <option value="">선택</option>
+            <option value="search">검색</option>
+            <option value="soomgo">숨고</option>
+            <option value="sns">SNS</option>
+            <option value="reco">지인 추천</option>
+            <option value="etc">기타</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="req" style="display:flex; align-items:center; gap:8px; font-weight:700">
+            <input type="checkbox" id="consent" />
+            개인정보 수집·이용에 동의합니다.
+          </label>
+
+          <button type="button" class="view-btn" id="privacyOpen" aria-haspopup="dialog" aria-controls="privacyModal" aria-expanded="false" style="margin-top:6px">
+            자세히 보기
+          </button>
+
+          <div class="error" data-for="consent">동의가 필요합니다.</div>
+        </div>
+
+        <div class="actions">
+          <a class="ghost" href="https://open.kakao.com/o/sWleDI8b" target="_blank" rel="noopener noreferrer">카카오톡으로 빠른 문의</a>
+          <button type="submit">문의 보내기</button>
+        </div>
+
+        <div class="success" id="successMsg" role="status" aria-live="polite">
+          문의가 접수되었습니다. 빠르게 회신드릴게요!
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>© 2025 DYNOV. All rights reserved.</footer>
+
+  <!-- 개인정보 수집·이용 안내 모달 -->
+  <div id="privacyModal" class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" aria-hidden="true">
+    <div class="privacy-modal__backdrop" data-dismiss></div>
+    <div class="privacy-modal__panel" role="document" tabindex="-1">
+      <header class="privacy-modal__header">
+        <h2 id="privacyTitle">개인정보 수집·이용 안내</h2>
+        <button type="button" class="privacy-modal__close" id="privacyClose" aria-label="닫기">✕</button>
+      </header>
+
+      <div class="privacy-modal__body">
+        <p><strong>1. 수집 항목</strong><br>
+          - 이름, 이메일, 연락처 (필수)<br>
+          - 서비스 이용 과정에서 자동 수집 정보(쿠키, 접속 IP 등)
+        </p>
+        <p><strong>2. 수집 및 이용 목적</strong><br>
+          - 문의사항 응대 및 서비스 제공<br>
+          - 계약 이행 및 서비스 품질 개선
+        </p>
+        <p><strong>3. 보유 및 이용 기간</strong><br>
+          - 수집일로부터 1년 보관 후 지체 없이 파기<br>
+          - 단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관
+        </p>
+        <p><strong>4. 동의 거부권 및 불이익</strong><br>
+          - 개인정보 제공을 거부할 권리가 있습니다.<br>
+          - 다만, 거부 시 서비스 이용에 제한이 있을 수 있습니다.
+        </p>
+        <p><strong>5. 제3자 제공</strong><br>
+          - 당사는 원칙적으로 수집한 개인정보를 외부에 제공하지 않습니다.<br>
+          - 다만, 법령에 의거하거나 이용자의 동의를 받은 경우 예외적으로 제공될 수 있습니다.
+        </p>
+        <p><strong>6. 처리 위탁</strong><br>
+          - 원활한 서비스 제공을 위해 일부 업무를 외부에 위탁할 수 있으며,<br>
+          - 이 경우 개인정보 보호 관련 법령에 따라 위탁계약을 체결하고 안전하게 관리합니다.<br>
+          - 현재: 구글(Google LLC) — Google Sheets 및 Apps Script 기반 데이터 저장·처리
+        </p>
+        <p><strong>7. 파기 방법</strong><br>
+          - 전자적 파일 형태: 복구 불가능한 기술적 방법으로 삭제<br>
+          - 종이 출력물: 분쇄 또는 소각을 통해 파기
+        </p>
+      </div>
+
+      <footer class="privacy-modal__footer">
+        <button type="button" class="btn" data-dismiss>확인</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 공통 스크립트 + 문의 전용 스크립트 -->
+  <script src="js/main.js" defer></script>
+  <script src="js/inquiry.js" defer></script>
+</body>
+</html>
