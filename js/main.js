@@ -17,9 +17,6 @@ const galleryImgs = Array.from(document.querySelectorAll('#portfolioGallery img'
 let currentIndex = -1;
 
 function openModal(imgEl){
-  // ⛔ 기존 모바일 차단 제거: 모바일에서도 모달 열림
-  // if (window.matchMedia('(max-width:700px)').matches) return;
-
   currentIndex = Math.max(0, galleryImgs.indexOf(imgEl));
   showImage(currentIndex);
   modal.classList.add('show');
@@ -154,39 +151,98 @@ window.openModal = openModal;
 window.closeModal = closeModal;
 window.changeImage = changeImage;
 
-// === 모바일 포트폴리오 무한 루프 ===
+/* =========================================================
+   Guide PRO
+   - PC(≥1200px): 모든 카드 항상 펼침(토글 비활성)
+   - Tablet/Mobile(<1200px): 아코디언(항상 하나만 열림, 슬라이드 애니메이션)
+   ========================================================= */
 (function(){
-  const gallery = document.getElementById('portfolioGallery');
-  if (!gallery) return;
+  const WRAP = document.querySelector('.guide.pro');
+  if(!WRAP) return;
 
-  const mq = window.matchMedia('(max-width:700px)');
-  if (!mq.matches) return; // 모바일에서만 적용
+  const BP = 700; // 데스크톱 기준 (← 700에서 1200으로 수정)
+  const items = [...WRAP.querySelectorAll('details')];
 
-  const tiles = gallery.querySelectorAll('.tile');
-  if (tiles.length === 0) return;
+  function isDesktop(){ return window.matchMedia(`(min-width:${BP}px)`).matches; }
 
-  // 앞뒤로 복제 아이템 추가
-  const firstClone = tiles[0].cloneNode(true);
-  const lastClone = tiles[tiles.length-1].cloneNode(true);
-  gallery.appendChild(firstClone);
-  gallery.insertBefore(lastClone, tiles[0]);
-
-  // 초기 스크롤 위치 (실제 첫번째 아이템)
-  gallery.scrollLeft = gallery.children[1].offsetLeft;
-
-  let isScrolling;
-  gallery.addEventListener('scroll', ()=>{
-    clearTimeout(isScrolling);
-    isScrolling = setTimeout(()=>{
-      const maxScroll = gallery.scrollWidth - gallery.clientWidth;
-      if (gallery.scrollLeft <= 0) {
-        // 맨앞 복제 → 실제 마지막으로 점프
-        gallery.scrollLeft = gallery.children[gallery.children.length-2].offsetLeft;
-      } else if (gallery.scrollLeft >= maxScroll) {
-        // 맨뒤 복제 → 실제 첫번째로 점프
-        gallery.scrollLeft = gallery.children[1].offsetLeft;
+  function openAllDesktop(){
+    items.forEach(d=>{
+      if(!d.open) d.open = true;
+      const c = d.querySelector('.content');
+      if(c){
+        c.style.height = 'auto';
+        c.style.overflow = 'visible';
       }
-    }, 40);
-  });
-})();
+    });
+    WRAP.dataset.mode = 'static';
+  }
 
+  function initMobile(){
+    WRAP.dataset.mode = 'accordion';
+    let opened = items.find(d=>d.open) || items[0];
+    items.forEach(d=>{
+      const c = d.querySelector('.content');
+      if(d === opened){
+        d.open = true;
+        if(c) c.style.height = 'auto';
+      }else{
+        d.open = false;
+        if(c) c.style.height = '0px';
+      }
+    });
+  }
+
+  function applyMode(){
+    if(isDesktop()) openAllDesktop();
+    else initMobile();
+  }
+
+  WRAP.addEventListener('toggle', (e)=>{
+    const d = e.target;
+    if(!(d instanceof HTMLDetailsElement)) return;
+    if(!WRAP.contains(d)) return;
+
+    if(WRAP.dataset.mode === 'static'){
+      d.open = true;
+      const c = d.querySelector('.content');
+      if(c) c.style.height = 'auto';
+      return;
+    }
+
+    if(d.open){
+      items.forEach(o=>{
+        if(o !== d){
+          o.open = false;
+          const oc = o.querySelector('.content');
+          if(oc) oc.style.height = '0px';
+        }
+      });
+    }
+
+    const c = d.querySelector('.content');
+    if(!c) return;
+
+    if(d.open){
+      c.style.height = 'auto';
+      const h = c.clientHeight + 'px';
+      c.style.height = '0px';
+      requestAnimationFrame(()=>{ c.style.height = h; });
+      setTimeout(()=>{ c.style.height = 'auto'; }, 230);
+    }else{
+      c.style.height = c.clientHeight + 'px';
+      requestAnimationFrame(()=>{ c.style.height = '0px'; });
+    }
+  }, true);
+
+  document.addEventListener('click', (e)=>{
+    const sum = e.target.closest('.guide.pro summary');
+    if(!sum) return;
+    if(sum.closest('.guide.pro')?.dataset.mode === 'static'){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+
+  applyMode();
+  window.addEventListener('resize', applyMode, { passive:true });
+})();
