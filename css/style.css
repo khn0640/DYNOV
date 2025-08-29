@@ -213,26 +213,30 @@ section h2{
 }
 .guide-list .right { text-align: left; }
 .guide-list .right p {
-  margin: 0 0 8px;
-  font-size: 14px;
-  line-height: 1.7;
+  margin: 0 0 14px;        /* 문단 끝 여백 넓힘 */
+  padding-bottom: 16px;    /* 문단-구분선 간격 */
+  font-size: 16px;
+  line-height: 1.6;       /* 줄 간격 여유 */
   font-weight: 500;
   color: #222;
   border-bottom: 1px solid rgba(0,0,0,.08);
 }
+
 .guide-list .right ul {
   list-style: none;
-  margin: 10px 0 0;
-  padding-left: 12px;
-  border-top: none;   /* ← 기존 선 제거 */
-  padding-top: 0;     /* ← 여백도 정리 */
+  margin: 16px 0 0;        /* 리스트 시작 전 위쪽 여백 확보 */
+  padding-left: 14px;      /* 들여쓰기 살짝 넓게 */
+  border-top: none;
+  padding-top: 0;
 }
+
 .guide-list .right li {
   position: relative;
-  margin: 5px 0;
+  margin: 10px 0;          /* 항목 위아래 균일 간격 */
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.2;        /* 항목 줄 간격 여유 */
 }
+
 .guide-list .right li::before {
   content: "";
   position: absolute;
@@ -370,16 +374,16 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
   .guide-list .row {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 8px 0;
+    gap: 4px;                 /* ← gap 살짝 늘려 여유 */
+    padding: 8px 0;          /* ← 위아래 여백도 넓힘 */
   }
   .guide-list .left {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     background: #f2f2f2;
-    padding: 8px 12px;
+    padding: 10px 14px;       /* ← 좌우 패딩도 조금 늘림 */
     border-radius: 0;
     width: 100%;
   }
@@ -399,40 +403,40 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
   .guide-list .right {
     text-align: left;
     margin: 0;
-    padding: 8px 12px;
+    padding: 10px 14px;       /* ← 내용부 패딩을 넉넉히 */
     width: 100%;
   }
   .guide-list .right p:first-of-type {
     font-size: 13px;
-    line-height: 1.5;
-    padding-bottom: 14px;
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(0,0,0,.08); /* 첫 문단 */
+    line-height: 1.6;        /* ← 줄간격 여유 */
+    padding-bottom: 12px;     /* ← 문단-구분선 간격 */
+    margin-bottom: 6px;       /* ← 문단과 리스트 간격 */
+    border-bottom: 1px solid rgba(0,0,0,.08);
     width: 100%;
   }
   .guide-list .right p {
     font-size: 13px;
-    line-height: 1.5;
-    margin: 4px 0 8px;
-    padding-bottom: 8px;           /* 모든 문단 구분선 */
+    line-height: 1.6;        /* ← 줄간격 여유 */
+    margin: 0 0 12px;         /* ← 문단 아래 여백 확대 */
+    padding-bottom: 10px;     /* ← 구분선과 간격 */
     font-weight: 500;
     color: #222;
     width: 100%;
-    border-bottom: 1px solid rgba(0,0,0,.08); /* 모든 문단 구분선 */
+    border-bottom: 1px solid rgba(0,0,0,.08);
   }
   .guide-list .right ul {
     list-style: none;
-    margin: 2px 0 0;
-    padding: 0;
+    margin: 14px 0 0;         /* ← 리스트 시작 전 여백 */
+    padding: 0 0 0 6px;      /* ← 들여쓰기 조금 넓게 */
     width: 100%;
     border: none;
   }
   .guide-list .right li {
     position: relative;
     padding-left: 10px;
-    margin: 2px 0;
+    margin: 4px 0;            /* ← 항목 사이 여백 넓힘 */
     font-size: 13px;
-    line-height: 1.5;
+    line-height: 1.4;         /* ← 항목 줄간격 여유 */
   }
   .guide-list .right li::before {
     content: "";
@@ -444,3 +448,23 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
     background-color: #000;
   }
 }
+/* Modal Arrows */
+.modal .prev,
+.modal .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,.4);
+  color: #fff;
+  border: none;
+  font-size: 36px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  user-select: none;
+}
+.modal .prev { left: 14px; }
+.modal .next { right: 14px; }
+.modal .prev:hover,
+.modal .next:hover { background: rgba(0,0,0,.7); }
+

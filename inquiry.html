@@ -220,7 +220,15 @@
           </div>
           <div>
             <label for="contactTime">가능 시간대 (선택)</label>
-            <input id="contactTime" name="contactTime" type="text" placeholder="예: 평일 13:00–18:00" />
+<select id="contactTime" name="contactTime">
+  <option value="" selected>선택</option>
+  <option value="morning">오전 (09:00–12:00)</option>
+  <option value="lunch">점심시간 (12:00–13:00)</option>
+  <option value="afternoon">오후 (13:00–18:00)</option>
+  <option value="evening">저녁 (18:00–21:00)</option>
+  <option value="weekend">주말 가능</option>
+  <option value="anytime">아무 때나</option>
+</select>
           </div>
         </div>
 

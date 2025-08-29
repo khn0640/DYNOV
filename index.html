@@ -280,13 +280,15 @@
   <footer>© 2025 DYNOV. All rights reserved.</footer>
 
   <!-- Lightbox -->
-  <div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="이미지 미리보기">
-    <button class="close" aria-label="닫기" onclick="closeModal()">×</button>
-    <div class="modal-content">
-      <div id="modalCaption" aria-live="polite"></div>
-      <img id="modalImage" alt="">
-    </div>
+<div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="이미지 미리보기">
+  <button class="close" aria-label="닫기" onclick="closeModal()">×</button>
+  <button class="prev" aria-label="이전 이미지" onclick="changeImage(-1)">❮</button>
+  <div class="modal-content">
+    <div id="modalCaption" aria-live="polite"></div>
+    <img id="modalImage" alt="">
   </div>
+  <button class="next" aria-label="다음 이미지" onclick="changeImage(1)">❯</button>
+</div>
 
   <script src="js/main.js" defer></script>
 </body>

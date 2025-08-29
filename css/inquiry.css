@@ -33,8 +33,8 @@ select::-ms-expand{ display:none }
 .chip input{ accent-color:#000 }
 .chip:hover{ background:#eee }
 
-.help{ font-size:var(--fs-help,12px); color:#666; margin-top:8px }
-.error{ font-size:var(--fs-help,12px); color:#c00; margin-top:8px; display:none }
+.help{ font-size:var(--fs-help,12px); color:#666; margin-top:8px; text-align:left; }
+.error{ font-size:var(--fs-help,12px); color:#c00; margin-top:8px; display:none; text-align: left; }
 .invalid input, .invalid textarea, .invalid select{ border-color:#c00; outline-color:#c00 }
 
 .actions{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:flex-end; margin-top:4px }

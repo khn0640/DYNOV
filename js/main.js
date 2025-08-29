@@ -7,27 +7,75 @@ const onScroll = () => {
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-// Lightbox
+// ===== Lightbox =====
 const modal = document.getElementById('imgModal');
 const modalImg = document.getElementById('modalImage');
+const captionEl = document.getElementById('modalCaption');
+
+// 갤러리 이미지 수집 & 현재 인덱스
+const galleryImgs = Array.from(document.querySelectorAll('#portfolioGallery img'));
+let currentIndex = -1;
+
 function openModal(imgEl){
-  if (window.matchMedia('(max-width:700px)').matches) return; // 모바일은 라이트박스 열지 않음
-  modalImg.src = imgEl.src;
-  modalImg.alt = imgEl.alt || '';
-  const caption = imgEl.closest('.tile').querySelector('.overlay')?.textContent || imgEl.alt || '';
-  document.getElementById('modalCaption').textContent = caption;
+  // ⛔ 기존 모바일 차단 제거: 모바일에서도 모달 열림
+  // if (window.matchMedia('(max-width:700px)').matches) return;
+
+  currentIndex = Math.max(0, galleryImgs.indexOf(imgEl));
+  showImage(currentIndex);
   modal.classList.add('show');
   modal.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
 }
+
+function showImage(index){
+  if (!galleryImgs.length) return;
+
+  // ✅ 무한 루프(양끝 래핑)
+  if (index < 0) index = galleryImgs.length - 1;
+  if (index >= galleryImgs.length) index = 0;
+  currentIndex = index;
+
+  const imgEl = galleryImgs[currentIndex];
+  modalImg.src = imgEl.src;
+  modalImg.alt = imgEl.alt || '';
+  const caption = imgEl.closest('.tile')?.querySelector('.overlay')?.textContent || imgEl.alt || '';
+  captionEl.textContent = caption;
+}
+
+function changeImage(step){
+  showImage(currentIndex + step);
+}
+
 function closeModal(){
   modal.classList.remove('show');
   modal.setAttribute('aria-hidden','true');
   modalImg.src = '';
   document.body.style.overflow='';
 }
+
 modal?.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if(!modal.classList.contains('show')) return; if(e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if(!modal.classList.contains('show')) return;
+  if(e.key === 'Escape') closeModal();
+  if(e.key === 'ArrowLeft') changeImage(-1);
+  if(e.key === 'ArrowRight') changeImage(1);
+});
+
+// === 모바일 스와이프 제스처(선택) ===
+let touchStartX = 0, touchStartY = 0;
+const SWIPE_THRESHOLD = 40; // px
+modalImg.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  touchStartX = t.clientX; touchStartY = t.clientY;
+}, { passive:true });
+modalImg.addEventListener('touchend', e => {
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD){
+    changeImage(dx > 0 ? -1 : 1);
+  }
+}, { passive:true });
 
 // 햄버거 메뉴 & 오버레이
 const navToggle = document.querySelector('.nav-toggle');
@@ -101,6 +149,44 @@ window.addEventListener('resize', () => {
   mo.observe(gallery, { childList:true });
 })();
 
-// 전역 접근을 위해 함수 노출 (index.html에서 onclick 사용)
+// 전역 접근 (index.html 버튼에서 사용)
 window.openModal = openModal;
 window.closeModal = closeModal;
+window.changeImage = changeImage;
+
+// === 모바일 포트폴리오 무한 루프 ===
+(function(){
+  const gallery = document.getElementById('portfolioGallery');
+  if (!gallery) return;
+
+  const mq = window.matchMedia('(max-width:700px)');
+  if (!mq.matches) return; // 모바일에서만 적용
+
+  const tiles = gallery.querySelectorAll('.tile');
+  if (tiles.length === 0) return;
+
+  // 앞뒤로 복제 아이템 추가
+  const firstClone = tiles[0].cloneNode(true);
+  const lastClone = tiles[tiles.length-1].cloneNode(true);
+  gallery.appendChild(firstClone);
+  gallery.insertBefore(lastClone, tiles[0]);
+
+  // 초기 스크롤 위치 (실제 첫번째 아이템)
+  gallery.scrollLeft = gallery.children[1].offsetLeft;
+
+  let isScrolling;
+  gallery.addEventListener('scroll', ()=>{
+    clearTimeout(isScrolling);
+    isScrolling = setTimeout(()=>{
+      const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+      if (gallery.scrollLeft <= 0) {
+        // 맨앞 복제 → 실제 마지막으로 점프
+        gallery.scrollLeft = gallery.children[gallery.children.length-2].offsetLeft;
+      } else if (gallery.scrollLeft >= maxScroll) {
+        // 맨뒤 복제 → 실제 첫번째로 점프
+        gallery.scrollLeft = gallery.children[1].offsetLeft;
+      }
+    }, 40);
+  });
+})();
+
