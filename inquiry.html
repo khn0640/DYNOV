@@ -143,7 +143,16 @@
           <div class="inline-controls">
             <label for="customHex" style="font-weight:700; font-size:14px;">HEX</label>
             <input type="color" id="customHexPicker" value="#000000">
-            <input type="text" id="customHex" name="customHex" placeholder="#000000" maxlength="7">
+            <input type="text" id="customHex" name="customHex"
+       placeholder="#000000"
+       maxlength="7"
+       inputmode="latin"
+       autocapitalize="off"
+       autocomplete="off"
+       autocorrect="off"
+       spellcheck="false"
+       pattern="^#[0-9A-Fa-f]{6}$">
+
           </div>
         </div>
 
@@ -318,8 +327,9 @@
       </div>
 
       <footer class="privacy-modal__footer">
-        <button type="button" class="btn" data-dismiss>확인</button>
-      </footer>
+  <button type="button" class="btn ghost" data-dismiss>닫기</button>
+  <button type="button" class="btn primary" id="privacyAgree">동의하고 닫기</button>
+</footer>
     </div>
   </div>
 

@@ -108,9 +108,18 @@ section[id]{ scroll-margin-top: calc(var(--navh) + 16px) }
 
 /* Section Titles */
 section h2{
-  display:block; width:100%; background:#000; color:#fff; font-size:22px; font-weight:800;
-  line-height:1.25; letter-spacing:.2px;
-  padding:clamp(12px, 2.5vw, 18px) 0;
+  display:block;
+  width:100%;
+  background:#000;
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:.2px;
+  padding-top: clamp(12px, 2.5vw, 18px);
+  padding-bottom: clamp(12px, 2.5vw, 18px);
+  padding-left: 0;   /* 좌우 여백 제거 */
+  padding-right: 0;
   margin:0;
   text-align:center;
 }
@@ -164,88 +173,42 @@ section h2{
 /* 14개 이상일 때 3행으로 전환 */
 #portfolio .gallery.rows-3{ grid-template-rows: repeat(3, 1fr); }
 
-/* Process */
+/* ===== Process · 가로 카드(PC) + 슬라이드(모바일) ===== */
+section.process{padding:28px 0px 44px}
 .process .steps{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-  gap: clamp(14px, 2.4vw, 24px);
-  border-top:2px solid #000;
-  border-bottom:2px solid #000;
-  padding: clamp(16px, 2.5vw, 24px) 0;
-}
-.step{ display:flex; flex-direction:column; align-items:center; padding:0 10px; text-align:center }
-.step .num{ font-weight:800; font-size:14px; margin-bottom:8px }
-.step .ico{ width:28px; height:28px; margin-bottom:8px }
-.step h3{ font-size:15px; margin:0 0 6px }
-.step p{ font-size:14px; color:#444; margin:0 }
-
-/* ===== Guide Section 기본(데스크탑) ===== 
-.guide-list {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 var(--x);
-  border-top: 1px solid #ddd;
-}
-.guide-list .row {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 16px;
-  padding: 20px 0;
-  border-bottom: 1px solid #eee;
-  align-items: flex-start;
-}
-.guide-list .left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.guide-list .ico {
-  width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-}
-.guide-list h3 {
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-  text-align: center;
-  line-height: 1.4;
-}
-.guide-list .right { text-align: left; }
-.guide-list .right p {
-  margin: 0 0 14px;        /* 문단 끝 여백 넓힘 */
-  padding-bottom: 16px;    /* 문단-구분선 간격 */
-  font-size: 16px;
-  line-height: 1.6;       /* 줄 간격 여유 */
-  font-weight: 500;
-  color: #222;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-}
-
-.guide-list .right ul {
-  list-style: none;
-  margin: 16px 0 0;        /* 리스트 시작 전 위쪽 여백 확보 */
-  padding-left: 14px;      /* 들여쓰기 살짝 넓게 */
-  border-top: none;
-  padding-top: 0;
-}
-
-.guide-list .right li {
   position: relative;
-  margin: 10px 0;          /* 항목 위아래 균일 간격 */
-  font-size: 14px;
-  line-height: 1.2;        /* 항목 줄 간격 여유 */
+  display: grid;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  gap: clamp(12px, 2vw, 16px);
+  padding: 22px 0;
+  border: 0;
+  max-width:1200px; margin:0 auto;
+}
+.process .step{
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  background: #fff; border: 1px solid #eee; border-radius: 14px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.05);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.process .step:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
+/*.process .step .num{
+  width: 26px; height: 26px; border-radius: 50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:12px; background:#000; color:#fff;
+  margin-bottom:10px;
+}*/
+.process .step .ico{ width:26px; height:26px; margin-bottom:8px }
+.process .step h3{ font-size:15px; font-weight:800; margin:4px 0 }
+.process .step p{ font-size:13px; color:#555; margin:0 }
+
+
+/* 태블릿 */
+@media (min-width:700px) and (max-width:1200px){
+  .process .steps{ grid-template-columns: repeat(5, minmax(140px, 1fr)); gap:12px }
 }
 
-.guide-list .right li::before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  top: 0.7em;
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background-color: #000;
-}*/
 
 /* FAQ */
 .faq{ max-width:var(--maxw); margin:0 auto; padding:0 var(--x); border-top:1px solid #ddd }
@@ -282,23 +245,23 @@ footer{ padding:20px; font-size:14px; color:#666; border-top:1px solid #ddd }
 
 /* 모바일 프로세스/가이드/FAQ 타이포 최적화 */
 @media (max-width:700px){
-  .process .steps { grid-template-columns: 1fr; gap: 0; }
-  .process .step { flex-direction: column; align-items: center; text-align: center; padding: 16px 0; position: relative; }
-  .process .step .num { display: none; }
-  .process .step::after {
-    content: ""; display: block; width: 20px; height: 20px; margin-top: 12px;
-    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 8l6 6 6-6'/></svg>");
+  /* 프로세스: 가로 슬라이드 */
+  #process{ position: relative }
+  .process .steps{
+    display:flex; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory; gap:10px; padding:10px 0 6px;
   }
-  .process .step:last-child::after { display: none; }
+  .process .steps::-webkit-scrollbar{ display:none }
+  .process .step{ flex:0 0 72vw; scroll-snap-align:center; border-radius:12px }
 
+  /* 텍스트 스케일 */
   .section p.lead, .process p.lead, #contact p.lead { font-size: 13px; line-height: 1.5; }
   .process{ padding: 40px 0; }
-  .process .steps{ padding: 8px 0 6px; }
-  .process .step{ padding: 14px 0; }
   .process .step .ico{ width: 24px; height: 24px; margin-bottom: 6px; }
   .process .step h3{ font-size: 14px; line-height: 1.35; margin: 2px 0 2px; letter-spacing: 0.1px; }
   .process .step p{ font-size: 13px; line-height: 1.55; color:#555; margin: 0; }
-
+  
+  /* FAQ 글자 */
   .faq summary { font-size:13px; }
   .faq p { font-size:13px; }
 }
@@ -503,10 +466,16 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
 
 /* 하단 내용(회색) — 카드 폭 끝까지 */
 .guide.pro .content{
-  flex:1; display:flex; flex-direction:column; justify-content:space-between;
-  background:#fafafa; border-top:1px solid #eee;
-  padding:12px 14px 14px; box-sizing:border-box; overflow:hidden;
-  text-align:left; transition:height .22s ease;
+  position: relative;
+  flex: 1;
+  display: block;
+  background:#fafafa;
+  border-top:1px solid #eee;
+  padding:12px 14px calc(var(--chips-h) + 14px); /* 칩 높이만큼 아래 여백 확보 */
+  box-sizing:border-box;
+  overflow:hidden;
+  text-align:left;
+  transition:height .22s ease;
 }
 
 /* 본문 리스트 */
@@ -515,12 +484,19 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
 
 /* 칩 — 항상 맨 아래 정렬, 유/무 관계없이 바닥선 통일 */
 .guide.pro .chips{
-  margin-top:auto; display:flex; flex-wrap:wrap; gap:6px;
-  padding-top:8px; border-top:1px solid #eee;
-  min-height:var(--chips-h); align-items:flex-end;
+  position: absolute;
+  left:14px; right:14px; bottom:14px;
+  display:flex; flex-wrap:wrap; gap:6px;
+  align-items:flex-end;
+  min-height:var(--chips-h);
+  padding-top:8px;
+  border-top:1px solid #eee;
+  margin-top:0; /* 기존 auto 제거 */
 }
+
 .guide.pro .chips.chips--placeholder{ visibility:hidden; }
 .guide.pro .chip{ display:inline-flex; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; border:1px solid #ddd; background:#fff; }
+
 
 /* 태블릿: 3열 */
 @media (max-width:1200px){
@@ -562,3 +538,80 @@ p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion:reduce){
   .guide.pro .content{ transition:none !important; }
 }
+
+/* 프로세스 카드 */
+.process .steps{
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr)); /* 폭 줄임 */
+  gap: 40px;   /* 화살표 공간 확보 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px var(--x);
+}
+
+.process .step{
+  position: relative;
+  background: #fff;
+  border: 1px solid #000;   /* 테두리만 */
+  border-radius: 0;         /* 라운드 제거 */
+  padding: 16px 12px;
+  box-shadow: none;         /* 그림자 제거 */
+  text-align: center;
+}
+.process .step:hover{       /* 호버 효과 제거 */
+  transform: none;
+  box-shadow: none;
+}
+
+/* 카드 사이 화살표 */
+.process .step-arrow{
+  position: absolute;
+  top: 50%;
+  right: -34px;             /* 카드 바깥쪽으로 살짝 */
+  transform: translateY(-50%);
+  color:#000;               /* SVG stroke 색상 */
+  pointer-events: none;
+}
+.process .step-arrow svg{
+  width: 26px;              /* 데스크톱 크기 (축소) */
+  height: 26px;
+  stroke-width: 2.4;
+}
+.process .step:last-child .step-arrow{
+  display: none;            /* 마지막 카드는 화살표 숨김 */
+}
+
+/* 모바일 */
+@media (max-width:700px){
+  .process .step{
+    flex: 0 0 68vw;         /* 카드 폭 줄이기 */
+    border-radius: 0;       /* 모바일에서도 라운드 제거 */
+  }
+  .process .step-arrow{
+    right: -30px;           /* 모바일 간격 조정 */
+  }
+  .process .step-arrow svg{
+    width: 20px;            /* 모바일 더 작게 */
+    height: 20px;
+    stroke-width: 2.2;
+  }
+}
+/* 모바일: 칩을 흐름으로 전환(겹침 방지) */
+@media (max-width:700px){
+  .guide.pro .item[open] .content{
+    padding:12px 14px 12px !important; /* 하단 여백을 일반값으로 */
+  }
+  .guide.pro .chips{
+    position: static;        /* 절대배치 해제 */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 0;           /* 높이 고정 해제 */
+    padding-top: 8px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+  }
+  .guide.pro .chips:empty::before{ display:none; }
+}
+

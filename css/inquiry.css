@@ -92,6 +92,16 @@ button[type="submit"]:hover{ opacity:.9 }
   height:32px;          /* 폼 전체 톤에 맞게 32~34px */
   padding:0 12px;
 }
+
+/* 모바일: HEX 입력 확대 방지 & 터치 타겟 */
+@media (max-width: 720px){
+  .inline-controls input[type="color"]{ width:36px; height:36px; }
+  .inline-controls #customHex{
+    height:40px;
+    font-size:16px; /* iOS 확대 방지 핵심 */
+  }
+}
+
 /* 칩 툴팁 */
 .chip .tooltip{
   position:absolute; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.88); color:#fff;
@@ -142,3 +152,13 @@ button[type="submit"]:hover{ opacity:.9 }
 /* 문장 줄바꿈 품질 (유지해도 무방) */
 html, body { word-break: keep-all; }
 p, li, h1, h2, h3, h4, h5, h6 { word-break: keep-all; overflow-wrap:anywhere }
+
+/* 모달 버튼 */
+.privacy-modal__footer .btn{
+  padding:10px 14px; border:1px solid #000; border-radius:10px;
+  font-weight:800; font-size:14px; line-height:1.4; cursor:pointer;
+  background:#fff; color:#000;
+}
+.privacy-modal__footer .btn.primary{ background:#000; color:#fff; }
+.privacy-modal__footer .btn:hover{ opacity:.9; }
+.privacy-modal__footer .btn.ghost:hover{ background:#000; color:#fff; }

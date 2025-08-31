@@ -17,6 +17,41 @@ if (hexPicker && hexInput){
     else { hexInput.classList.add('hex-bad'); }
   });
 }
+// 모바일·접근성 강화: 자동 보정·폴백
+(function(){
+  if(!hexInput) return;
+
+  // '#' 자동 보정 + 대문자 변환
+  const normalizeHex = (str) => {
+    let v = (str || '').trim();
+    if(!v) return '';
+    if(v[0] !== '#') v = '#' + v;
+    if(v.length === 4) { // #abc → #aabbcc
+      v = '#' + v.slice(1).split('').map(ch=>ch+ch).join('');
+    }
+    return v.toUpperCase();
+  };
+
+  // 입력 종료 시 자동 보정
+  hexInput.addEventListener('blur', ()=>{
+    const v = normalizeHex(hexInput.value);
+    if(v && /^#[0-9A-F]{6}$/.test(v)){
+      hexInput.value = v;
+      if(hexPicker) hexPicker.value = v;
+      hexInput.classList.remove('hex-bad');
+    }
+  });
+
+  // color input 지원 여부 체크
+  const supportsColor = (() => {
+    const i = document.createElement('input');
+    i.setAttribute('type','color');
+    return i.type === 'color';
+  })();
+  if(!supportsColor && hexPicker){
+    hexPicker.style.display = 'none';
+  }
+})();
 
 // 톤&무드: 최대 2개, '모름' 단독
 const toneWrap = document.getElementById('toneMood');
@@ -121,15 +156,18 @@ if (colorWrap && hexInput && hexPicker){
   const modal     = document.getElementById('privacyModal');
   if(!openBtn || !modal) return;
 
-  const closeBtn  = document.getElementById('privacyClose');
-  const dismissEls= modal.querySelectorAll('[data-dismiss]');
-  let lastFocus   = null;
+  const closeBtn   = document.getElementById('privacyClose');
+  const dismissEls = modal.querySelectorAll('[data-dismiss]');
+  const agreeBtn   = document.getElementById('privacyAgree'); // ← 추가
+  const panel      = modal.querySelector('.privacy-modal__panel'); // ← 클래스 수정
+  const backdropSel= 'privacy-modal__backdrop';                      // ← 클래스 수정
+  let lastFocus    = null;
 
   function openModal(){
     lastFocus = document.activeElement;
     modal.setAttribute('aria-hidden','false');
     document.body.classList.add('body--lock');
-    modal.querySelector('.modal__panel').focus();
+    panel && panel.focus();
     document.addEventListener('keydown', onKeydown);
     openBtn.setAttribute('aria-expanded','true');
   }
@@ -142,10 +180,29 @@ if (colorWrap && hexInput && hexPicker){
   }
   function onKeydown(e){ if(e.key === 'Escape') closeModal(); }
 
+  // 열기/닫기 바인딩
   openBtn.addEventListener('click', openModal);
   if(closeBtn) closeBtn.addEventListener('click', closeModal);
   dismissEls.forEach(el => el.addEventListener('click', closeModal));
-  modal.addEventListener('click', (e)=>{ if(e.target.classList.contains('modal__backdrop')) closeModal(); });
+  modal.addEventListener('click', (e)=>{
+    if(e.target.classList && e.target.classList.contains(backdropSel)) closeModal();
+  });
+
+  // "동의하고 닫기" : 체크박스 체크 + 닫기
+  if(agreeBtn){
+    agreeBtn.addEventListener('click', ()=>{
+      const consent = document.getElementById('consent');
+      if(consent) {
+        consent.checked = true;
+        // 에러 메시지 숨김(있다면)
+        const err = document.querySelector('[data-for="consent"]');
+        if(err) err.style.display = 'none';
+        const fieldWrap = consent.closest('div');
+        if(fieldWrap) fieldWrap.classList.remove('invalid');
+      }
+      closeModal();
+    });
+  }
 })();
 
 // ====== Google Sheets 전송 ======

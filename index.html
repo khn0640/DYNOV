@@ -113,43 +113,81 @@
   <section id="process" class="process" aria-label="작업 프로세스">
     <h2 id="process-title">작업 프로세스</h2>
     <p class="lead">“아이디어는 신속하게, 디테일은 완성도 있게.”</p>
-    <div class="steps" aria-labelledby="process-title">
-      <div class="step">
-        <span class="num">01</span>
+
+    <div class="steps" id="processSteps" aria-labelledby="process-title">
+      <div class="step">        
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 3h18v4H3z"></path><path d="M3 9h18v12H3z"></path>
         </svg>
         <div><h3>프로젝트 킥오프</h3><p>목표·타깃·자료 정리</p></div>
+        <span class="step-arrow" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18l6-6-6-6"/>
+  </svg>
+</span>
       </div>
       <div class="step">
-        <span class="num">02</span>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/><path d="M20 16l.8 2.2L23 19l-2.2.8L20 22l-.8-2.2L17 19l2.2-.8L20 16z"/><path d="M4 14l.6 1.6L7 16l-1.6.6L4 19l-.6-1.6L2 16l1.6-.6L4 14z"/>
+          <path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/>
+          <path d="M20 16l.8 2.2L23 19l-2.2.8L20 22l-.8-2.2L17 19l2.2-.8L20 16z"/>
+          <path d="M4 14l.6 1.6L7 16l-1.6.6L4 19l-.6-1.6L2 16l1.6-.6L4 14z"/>
         </svg>
         <div><h3>콘셉트 제안</h3><p>키 비주얼 방향성</p></div>
+        <span class="step-arrow" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18l6-6-6-6"/>
+  </svg>
+</span>
       </div>
       <div class="step">
-        <span class="num">03</span>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect>
         </svg>
         <div><h3>디자인 전개</h3><p>메인 디자인을 전체로 확장</p></div>
+        <span class="step-arrow" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18l6-6-6-6"/>
+  </svg>
+</span>
       </div>
       <div class="step">
-        <span class="num">04</span>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
         <div><h3>검토 및 수정</h3><p>요청사항 반영</p></div>
+        <span class="step-arrow" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18l6-6-6-6"/>
+  </svg>
+</span>
       </div>
       <div class="step">
-        <span class="num">05</span>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 4h16v16H4z"></path><path d="M8 12l2.5 2.5L16 9"></path>
         </svg>
         <div><h3>최종 납품</h3><p>PPT·PDF·이미지 등 맞춤 포맷</p></div>
-      </div>
-    </div>
+      </div>    
   </section>
+
+  <script>
+    // 모바일: 섹션 보이면 힌트 1회 페이드아웃
+    (function(){
+      const mq = window.matchMedia('(max-width:700px)');
+      const section = document.getElementById('process');
+      const hint = section?.querySelector('.process-swipe-hint');
+      if (!section || !hint) return;
+      const obs = new IntersectionObserver((entries, o)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting && mq.matches){
+            hint.style.opacity = '1';
+            setTimeout(()=>{ hint.style.transition='opacity .6s'; hint.style.opacity='0'; }, 2500);
+            o.unobserve(section);
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(section);
+    })();
+  </script>
 
   <!-- Guide -->
   <section id="guide" class="section" aria-label="의뢰 가이드">
@@ -157,104 +195,119 @@
   <p class="lead">처음 문의부터 납품까지, 아래 체크리스트만 준비하시면 더 빠르고 매끄럽게 진행됩니다.</p>
 
   <div class="guide pro">
-    <!-- 01 -->
-    <details open class="item">
-      <summary>
-        <span class="badge">01</span>
-        <span class="tit">준비자료</span>
-        <span class="sub">빠른 킥오프를 위한 체크리스트</span>
-        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </summary>
-      <div class="content">
-        <ul class="bullets">
-          <li>텍스트 원고(최신본), 로고/브랜드 컬러, 사용 이미지(있다면 원본)</li>
-          <li>참고자료: 기존 산출물, 레퍼런스 링크, 경쟁사 예시</li>
-        </ul>
-        <div class="chips"><span class="chip">브리프</span><span class="chip">레퍼런스</span><span class="chip">에셋</span></div>
+  <!-- 01 -->
+  <details open class="item">
+    <summary>
+      <span class="badge">01</span>
+      <span class="tit">준비 자료</span>
+      <span class="sub">프로젝트 시작 전 준비 체크리스트</span>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </summary>
+    <div class="content">
+      <ul class="bullets">
+        <li>텍스트 원고, 로고, 브랜드 컬러 등 기본 자산 준비</li>
+        <li>참고 자료와 레퍼런스, 경쟁사 예시를 함께 제공</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">브리프</span>
+        <span class="chip">레퍼런스</span>
       </div>
-    </details>
-
-    <!-- 02 -->
-    <details class="item">
-      <summary>
-        <span class="badge">02</span>
-        <span class="tit">범위 & 일정</span>
-        <span class="sub">페이지·시안·수정 횟수 기준</span>
-        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </summary>
-      <div class="content">
-        <ul class="bullets">
-          <li>예) 프레젠테이션 20p / 시안 1안 / 작업 5영업일 / 수정 2회</li>
-          <li>신속 진행 옵션 제공(일정·비용 별도 협의)</li>
-        </ul>
-        <div class="chips"><span class="chip">일정 협의</span><span class="chip">스코프 확정</span></div>
-      </div>
-    </details>
-
-    <!-- 03 -->
-    <details class="item">
-      <summary>
-        <span class="badge">03</span>
-        <span class="tit">비용 기준</span>
-        <span class="sub">난이도/범위/에셋 유무</span>
-        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </summary>
-      <div class="content">
-        <ul class="bullets">
-          <li>페이지 수 / 난이도 / 에셋 제작 유무</li>
-          <li>브랜드 가이드·템플릿·모션 등은 별도 견적</li>
-        </ul>
-        <div class="chips"><span class="chip">견적서</span><span class="chip">마일스톤</span></div>
-      </div>
-    </details>
-
-    <!-- 04 -->
-    <details class="item">
-      <summary>
-        <span class="badge">04</span>
-        <span class="tit">수정 정책</span>
-        <span class="sub">기본 2회 / 범위 초과 시 추가</span>
-        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </summary>
-      <div class="content">
-        <ul class="bullets">
-          <li>단순 문구·이미지 교체 중심</li>
-          <li>콘셉트 변경·대량 페이지 증감은 추가 범위 산정</li>
-        </ul>
-        <div class="chips chips--placeholder">
-      <!-- <span class="chip">브리프</span> ... -->
     </div>
-  </div>
-</details>
+  </details>
 
-    <!-- 05 -->
-    <details class="item">
-      <summary>
-        <span class="badge">05</span>
-        <span class="tit">파일 & 라이선스</span>
-        <span class="sub">상업용 자산만 사용</span>
-        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </summary>
-      <div class="content">
-        <ul class="bullets">
-          <li>납품: PPT·PDF·JPG·PNG (키 비주얼 소스는 별도 협의)</li>
-          <li>폰트·이미지 라이선스 명세 제공</li>
-        </ul>
-        <div class="chips"><span class="chip">PPT/PDF</span><span class="chip">라이선스 명세</span></div>
+  <!-- 02 -->
+  <details class="item">
+    <summary>
+      <span class="badge">02</span>
+      <span class="tit">범위 일정</span>
+      <span class="sub">페이지 분량과 시안 및 수정 기준 안내</span>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </summary>
+    <div class="content">
+      <ul class="bullets">
+        <li>예: 20페이지, 1안, 5영업일, 수정 2회 기준 제시</li>
+        <li>긴급 진행은 신속 옵션을 별도 협의로 제공 가능</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">범위 확정</span>
+        <span class="chip">일정 협의</span>
       </div>
-    </details>
-  </div>
+    </div>
+  </details>
+
+  <!-- 03 -->
+  <details class="item">
+    <summary>
+      <span class="badge">03</span>
+      <span class="tit">비용 기준</span>
+      <span class="sub">난이도와 범위·에셋 제작 여부 기준</span>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </summary>
+    <div class="content">
+      <ul class="bullets">
+        <li>페이지 수, 난이도, 에셋 제작 여부에 따라 산정</li>
+        <li>브랜드 가이드, 모션 작업은 별도 견적이 필요함</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">견적 기준</span>
+        <span class="chip">추가 옵션</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- 04 -->
+  <details class="item">
+    <summary>
+      <span class="badge">04</span>
+      <span class="tit">수정 정책</span>
+      <span class="sub">기본 제공 2회, 초과 시 추가 비용 적용</span>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </summary>
+    <div class="content">
+      <ul class="bullets">
+        <li>단순 문구 변경과 이미지 교체 중심으로 적용</li>
+        <li>콘셉트 변경이나 대량 증감은 별도 추가 비용 산정</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">수정 범위</span>
+        <span class="chip">추가 협의</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- 05 -->
+  <details class="item">
+    <summary>
+      <span class="badge">05</span>
+      <span class="tit">파일 규정</span>
+      <span class="sub">납품 파일 포맷 및 라이선스 명세 안내</span>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 10l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </summary>
+    <div class="content">
+      <ul class="bullets">
+        <li>PPT, PDF, JPG, PNG 납품, 소스 파일은 별도 협의</li>
+        <li>사용한 폰트와 이미지 라이선스 명세서를 함께 제공</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">납품 파일</span>
+        <span class="chip">라이선스</span>
+      </div>
+    </div>
+  </details>
+</div>
+
 </section>
+
 
   <section id="faq" class="section" aria-label="자주 묻는 질문">
     <h2>FAQ</h2>

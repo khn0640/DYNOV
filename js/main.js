@@ -7,36 +7,33 @@ const onScroll = () => {
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-// ===== Lightbox =====
+// ===== Lightbox: 무한 루프 보강 =====
 const modal = document.getElementById('imgModal');
 const modalImg = document.getElementById('modalImage');
 const captionEl = document.getElementById('modalCaption');
-
-// 갤러리 이미지 수집 & 현재 인덱스
 const galleryImgs = Array.from(document.querySelectorAll('#portfolioGallery img'));
 let currentIndex = -1;
 
+// 안전한 모듈로 (음수 지원)
+const mod = (n, m) => ((n % m) + m) % m;
+
 function openModal(imgEl){
-  currentIndex = Math.max(0, galleryImgs.indexOf(imgEl));
+  const idx = galleryImgs.indexOf(imgEl);
+  currentIndex = idx >= 0 ? idx : 0;
   showImage(currentIndex);
   modal.classList.add('show');
   modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
 function showImage(index){
   if (!galleryImgs.length) return;
-
-  // ✅ 무한 루프(양끝 래핑)
-  if (index < 0) index = galleryImgs.length - 1;
-  if (index >= galleryImgs.length) index = 0;
-  currentIndex = index;
-
+  currentIndex = mod(index, galleryImgs.length);
   const imgEl = galleryImgs[currentIndex];
   modalImg.src = imgEl.src;
   modalImg.alt = imgEl.alt || '';
-  const caption = imgEl.closest('.tile')?.querySelector('.overlay')?.textContent || imgEl.alt || '';
-  captionEl.textContent = caption;
+  captionEl.textContent =
+    imgEl.closest('.tile')?.querySelector('.overlay')?.textContent || imgEl.alt || '';
 }
 
 function changeImage(step){
@@ -47,16 +44,35 @@ function closeModal(){
   modal.classList.remove('show');
   modal.setAttribute('aria-hidden','true');
   modalImg.src = '';
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 
-modal?.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => {
-  if(!modal.classList.contains('show')) return;
-  if(e.key === 'Escape') closeModal();
-  if(e.key === 'ArrowLeft') changeImage(-1);
-  if(e.key === 'ArrowRight') changeImage(1);
-});
+/* ✅ 전역 노출: 이 한 번만 남기고, 아래의 중복 바인딩(두 번째 블록)은 삭제하세요. */
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.changeImage = changeImage;
+
+// ✅ Lightbox 키보드 컨트롤 & 오버레이 닫기
+(function(){
+  if (!modal) return;
+
+  // 배경(모달 컨테이너) 클릭 시, 이미지 외 영역이면 닫기
+  modal.addEventListener('click', (e)=>{
+    if (e.target === modal) closeModal();
+  });
+
+  // 키보드: ESC 닫기 / 좌우 이동
+  function onKeydown(e){
+    if (!modal.classList.contains('show')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeModal(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); changeImage(-1); }
+    if (e.key === 'ArrowRight'){ e.preventDefault(); changeImage(1); }
+  }
+  document.addEventListener('keydown', onKeydown);
+
+  // (선택) 접근성: role/aria-modal 속성은 HTML에 한번만 세팅
+  // <div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"> ...
+})();
 
 // === 모바일 스와이프 제스처(선택) ===
 let touchStartX = 0, touchStartY = 0;
@@ -146,21 +162,12 @@ window.addEventListener('resize', () => {
   mo.observe(gallery, { childList:true });
 })();
 
-// 전역 접근 (index.html 버튼에서 사용)
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.changeImage = changeImage;
-
-/* =========================================================
-   Guide PRO
-   - PC(≥1200px): 모든 카드 항상 펼침(토글 비활성)
-   - Tablet/Mobile(<1200px): 아코디언(항상 하나만 열림, 슬라이드 애니메이션)
-   ========================================================= */
+/* Guide PRO */
 (function(){
   const WRAP = document.querySelector('.guide.pro');
   if(!WRAP) return;
 
-  const BP = 700; // 데스크톱 기준 (← 700에서 1200으로 수정)
+  const BP = 700;
   const items = [...WRAP.querySelectorAll('details')];
 
   function isDesktop(){ return window.matchMedia(`(min-width:${BP}px)`).matches; }
@@ -246,3 +253,90 @@ window.changeImage = changeImage;
   applyMode();
   window.addEventListener('resize', applyMode, { passive:true });
 })();
+/* ===== Portfolio: 모바일 무한 루프 캐러셀 (누수 방지 보강) ===== */
+(function () {
+  const MQ_MOBILE = window.matchMedia('(max-width:700px)');
+  const gallery = document.querySelector('#portfolio .gallery');
+  if (!gallery) return;
+
+  let initialized = false;
+  let items = [];
+  let realCount = 0;
+  let settleTimer = null;
+  let onScrollRef = null; // ✅ 추가: 리스너 참조 저장
+
+  function childX(i) {
+    return items[i]?.offsetLeft || 0;
+  }
+  function scrollToIndex(i, behavior = 'instant') {
+    gallery.scrollTo({ left: childX(i), behavior: behavior === 'smooth' ? 'smooth' : 'auto' });
+  }
+  function nearestIndex() {
+    const x = gallery.scrollLeft;
+    let bestI = 0, bestD = Infinity;
+    for (let i = 0; i < items.length; i++) {
+      const d = Math.abs(childX(i) - x);
+      if (d < bestD) { bestD = d; bestI = i; }
+    }
+    return bestI;
+  }
+
+  function initLoop() {
+    if (initialized || !MQ_MOBILE.matches) return;
+    items = Array.from(gallery.children);
+    realCount = items.length;
+    if (realCount < 2) return;
+
+    const firstClone = items[0].cloneNode(true);
+    const lastClone  = items[realCount - 1].cloneNode(true);
+    gallery.insertBefore(lastClone, items[0]);
+    gallery.appendChild(firstClone);
+
+    items = Array.from(gallery.children);
+
+    requestAnimationFrame(() => {
+      scrollToIndex(1, 'instant');
+    });
+
+    onScrollRef = function onScroll(){
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        const i = nearestIndex();
+        if (i === 0) { scrollToIndex(realCount, 'instant'); return; }
+        if (i === realCount + 1) { scrollToIndex(1, 'instant'); return; }
+        // 필요 시 스냅 보정:
+        // scrollToIndex(i, 'smooth');
+      }, 90);
+    };
+
+    gallery.addEventListener('scroll', onScrollRef, { passive: true });
+    initialized = true;
+  }
+
+  function destroyLoop() {
+    if (!initialized) return;
+
+    // ✅ 스크롤 리스너 제거
+    if (onScrollRef) {
+      gallery.removeEventListener('scroll', onScrollRef);
+      onScrollRef = null;
+    }
+
+    items = Array.from(gallery.children);
+    if (items.length >= realCount + 2) {
+      gallery.removeChild(items[0]);                 // 앞 복제 제거
+      gallery.removeChild(gallery.lastElementChild); // 뒤 복제 제거
+    }
+    gallery.scrollTo({ left: 0, behavior: 'auto' });
+
+    initialized = false;
+  }
+
+  function apply() {
+    if (MQ_MOBILE.matches) initLoop();
+    else destroyLoop();
+  }
+  apply();
+  window.addEventListener('resize', apply, { passive: true });
+})();
+
