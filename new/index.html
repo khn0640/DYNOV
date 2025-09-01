@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YourBrand · 글로벌 바이오/테크 기업 템플릿</title>
+  <meta name="description" content="기업 소개, 제품/사업, 뉴스, ESG/IR, 채용까지 한 눈에 보여주는 반응형 웹 템플릿." />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Swiper & AOS (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  
+  <style>
+    :root{
+      --bg:#0a0f1a;       /* 페이지 배경(다크) */
+      --paper:#ffffff;     /* 카드/본문 배경 */
+      --ink:#0b1220;       /* 본문 글자 */
+      --muted:#5a6475;     /* 설명 글자 */
+      --brand:#2cb67d;     /* 포인트 컬러 (원하면 #2450ff 로 변경) */
+      --brand-2:#7ce2b8;   /* 보조 포인트 */
+      --line:#e7e9ee;      /* 구분선 */
+      --maxw:1200px;       /* 컨테이너 최대폭 */
+      --x: clamp(12px, 2vw, 24px);
+      --y: clamp(18px, 4vw, 56px);
+      --radius: 16px;
+      --navh:72px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;text-rendering:optimizeLegibility}
+    body{
+      margin:0; font-family:'Pretendard', system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', sans-serif;
+      color:var(--ink); background:linear-gradient(180deg, #f7fafc 0%, #ffffff 30%);
+    }
+    img{max-width:100%; height:auto; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 var(--x)}
+
+    /* 헤더 */
+    .header{position:sticky; top:0; z-index:1000; height:var(--navh); background:#fff; border-bottom:1px solid #f0f2f5; display:flex; align-items:center; box-shadow: 0 1px 0 rgba(0,0,0,.02)}
+    .header .inner{display:flex; align-items:center; justify-content:space-between; height:100%}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand .logo{width:28px; height:28px; border-radius:8px; background:radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand));}
+    .nav{display:flex; align-items:center; gap:24px}
+    .nav a{font-weight:600}
+    .nav a:hover{color:var(--brand)}
+    .lang{
+      display:flex; align-items:center; gap:8px; border:1px solid var(--line); padding:6px 10px; border-radius:999px; font-size:14px; background:#fff
+    }
+    .hamburger{display:none; width:36px; height:36px; border:1px solid var(--line); border-radius:10px; align-items:center; justify-content:center}
+    .hamburger span{width:18px; height:2px; background:#111; position:relative}
+    .hamburger span::before,.hamburger span::after{content:""; position:absolute; left:0; right:0; height:2px; background:#111}
+    .hamburger span::before{top:-6px} .hamburger span::after{top:6px}
+
+    /* 히어로 */
+    .hero{position:relative; background:#0a1121; color:#fff; overflow:hidden}
+    .hero::before{content:""; position:absolute; inset:-20% -10% auto -10%; height:120%; background:radial-gradient(1200px 400px at 50% -10%, rgba(124,226,184,.35), transparent 60%);} 
+    .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:40px; align-items:center; min-height:calc(520px + 6vw); padding: clamp(40px,10vw,100px) var(--x)}
+    .hero h1{font-size: clamp(28px, 4.4vw, 56px); line-height:1.1; margin:0 0 16px}
+    .hero p.lead{font-size: clamp(15px, 1.3vw, 18px); color:#dbe5ef; margin:0 0 24px}
+    .hero .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:44px; padding:0 18px; border-radius:12px; font-weight:700; border:1px solid transparent}
+    .btn.primary{background:var(--brand); color:#072a1b}
+    .btn.ghost{border-color:rgba(255,255,255,.35); color:#e8f6ef; backdrop-filter:saturate(140%) blur(6px)}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px}
+    .kpi{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:16px}
+    .kpi strong{display:block; font-size: clamp(20px, 3vw, 32px)}
+    .kpi span{color:#b7c7d9; font-weight:600}
+    .hero-media{position:relative}
+    .mock{
+      aspect-ratio: 16 / 10; border-radius:18px; overflow:hidden; box-shadow: var(--shadow);
+      background: linear-gradient(180deg, #1b2742, #0d1426); display:grid; place-items:center; color:#9fb7ff; font-weight:700;
+    }
+
+    /* 하이라이트 스와이퍼 */
+    .section{padding: var(--y) 0}
+    .section .head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:18px}
+    .section h2{font-size: clamp(22px, 2.6vw, 32px); margin:0}
+    .muted{color:var(--muted)}
+
+    .card{background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow: var(--shadow)}
+    .card .body{padding:16px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
+    .chip{font-size:12px; border:1px solid var(--line); padding:6px 10px; border-radius:999px; color:#334155; background:#f7fafc}
+
+    /* 뉴스 리스트 */
+    .news{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .news .item{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:8px}
+    .news .item time{font-size:12px; color:#64748b; font-weight:700}
+    .news .item h3{font-size:16px; margin:0}
+
+    /* 2열 섹션 (ESG/IR) */
+    .grid2{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px}
+    .tile{background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px}
+    .tile .row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-bottom:1px dashed #e7ecf3}
+    .tile .row:last-child{border-bottom:none}
+
+    /* 글로벌 거점 */
+    .world{display:grid; grid-template-columns: .9fr 1.1fr; gap:18px}
+    .map{aspect-ratio: 16 / 9; background: conic-gradient(from 90deg at 70% 20%, #e8fff4, #f4fbff, #fff0); border:1px solid var(--line); border-radius:16px; display:grid; place-items:center}
+    .locations{display:grid; gap:10px}
+    .locations .loc{display:flex; align-items:center; justify-content:space-between; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px}
+
+    /* 채용 CTA */
+    .ctaBand{background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#072a1b}
+    .ctaBand .wrap{display:flex; align-items:center; justify-content:space-between; gap:18px; padding:32px var(--x)}
+
+    /* 푸터 */
+    .footer{background:#0b1220; color:#c6d0e0; padding:40px 0}
+    .footer .grid{display:grid; grid-template-columns: 1fr 1fr; gap:20px}
+    .footer small{color:#94a3b8}
+
+    /* 반응형 */
+    @media (max-width: 1024px){
+      .hero .wrap{grid-template-columns: 1fr; gap:24px}
+      .grid2, .world{grid-template-columns: 1fr}
+    }
+    @media (max-width: 860px){
+      .nav{display:none}
+      .hamburger{display:inline-flex}
+      .news{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 560px){
+      .kpis{grid-template-columns:1fr 1fr}
+      .news{grid-template-columns: 1fr}
+      .footer .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner" aria-label="주요 메뉴">
+    <div class="container inner">
+      <a class="brand" href="#" aria-label="홈으로">
+        <span class="logo" aria-hidden="true"></span>
+        <span>YourBrand</span>
+      </a>
+      <nav class="nav" aria-label="사이트 내비게이션">
+        <a href="#about">회사소개</a>
+        <a href="#business">사업/제품</a>
+        <a href="#news">뉴스룸</a>
+        <a href="#esg">ESG/IR</a>
+        <a href="#careers">채용</a>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기" onclick="document.body.classList.toggle('nav-open')"><span></span></button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer (간단 버전) -->
+  <aside class="drawer" aria-hidden="true"></aside>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container wrap">
+      <div data-aos="fade-up">
+        <h1>환자의 더 나은 삶을 위한 <br/>글로벌 솔루션</h1>
+        <p class="lead">바이오의약, 디지털 헬스, 제조·유통 플랫폼까지 이어지는 통합 가치사슬.</p>
+        <div class="cta">
+          <a class="btn primary" href="#business">제품/사업 보기</a>
+          <a class="btn ghost" href="#esg">지속가능경영(ESG)</a>
+        </div>
+        <div class="kpis" aria-label="핵심 지표">
+          <div class="kpi"><strong>45+</strong><span>글로벌 파트너</span></div>
+          <div class="kpi"><strong>120개국</strong><span>공급 네트워크</span></div>
+          <div class="kpi"><strong>∞</strong><span>지속되는 혁신</span></div>
+        </div>
+      </div>
+      <div class="hero-media" data-aos="zoom-in">
+        <div class="mock">Hero/Brand Visual (16:10)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Highlights (Swiper) -->
+  <section class="section" id="business">
+    <div class="container">
+      <div class="head">
+        <h2>주요 사업 하이라이트</h2>
+        <p class="muted">제품 파이프라인 · CMO/CDMO · 글로벌 유통</p>
+      </div>
+      <div class="swiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <!-- slide -->
+          <article class="swiper-slide card">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop" alt="바이오의약 연구" />
+            <div class="body">
+              <h3>바이오시밀러 파이프라인</h3>
+              <p class="muted">면역·종양 영역 중심의 임상/허가 진행</p>
+              <div class="chips">
+                <span class="chip">임상 3상</span>
+                <span class="chip">미국/유럽</span>
+                <span class="chip">파트너십</span>
+              </div>
+            </div>
+          </article>
+          <article class="swiper-slide card">
+            <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=1600&auto=format&fit=crop" alt="생산 시설" />
+            <div class="body">
+              <h3>스마트 생산(CMO/CDMO)</h3>
+              <p class="muted">확장형 모듈, 품질·공정 데이터 표준화</p>
+              <div class="chips">
+                <span class="chip">GMP</span>
+                <span class="chip">스케일업</span>
+                <span class="chip">QMS</span>
+              </div>
+            </div>
+          </article>
+          <article class="swiper-slide card">
+            <img src="https://images.unsplash.com/photo-1581594693700-7b3c1b218d5e?q=80&w=1600&auto=format&fit=crop" alt="글로벌 물류" />
+            <div class="body">
+              <h3>글로벌 유통/로지스틱스</h3>
+              <p class="muted">저온체인·현지화·규제 대응 기반의 공급</p>
+              <div class="chips">
+                <span class="chip">GDP</span>
+                <span class="chip">현지 파트너</span>
+                <span class="chip">리스크 관리</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsroom -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="head">
+        <h2>뉴스룸</h2>
+        <a class="muted" href="#">전체보기</a>
+      </div>
+      <div class="news" data-aos="fade-up" data-aos-delay="100">
+        <a class="item" href="#">
+          <time datetime="2025-08-30">2025.08.30</time>
+          <h3>미국 생산거점 확장 관련 업데이트</h3>
+          <p class="muted">현지 규제 대응 및 공급 안정성 제고 계획…</p>
+        </a>
+        <a class="item" href="#">
+          <time datetime="2025-08-10">2025.08.10</time>
+          <h3>ESG 평가 등급 상향 공시</h3>
+          <p class="muted">환경·안전·윤리 전 영역에서 개선 성과…</p>
+        </a>
+        <a class="item" href="#">
+          <time datetime="2025-07-21">2025.07.21</time>
+          <h3>바이오시밀러 신제품 허가 신청</h3>
+          <p class="muted">면역질환 적응증 확대 및 라인업 강화…</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESG & IR -->
+  <section class="section" id="esg">
+    <div class="container grid2">
+      <div class="tile" data-aos="fade-up">
+        <h3>지속가능경영(ESG)</h3>
+        <div class="row"><strong>환경</strong><span class="muted">탄소/에너지/수자원 관리</span></div>
+        <div class="row"><strong>사회</strong><span class="muted">안전/품질/동반성장</span></div>
+        <div class="row"><strong>지배구조</strong><span class="muted">윤리/컴플라이언스</span></div>
+        <a class="btn" style="margin-top:12px; border-color:var(--line)" href="#">ESG 보고서</a>
+      </div>
+      <div class="tile" data-aos="fade-up" data-aos-delay="120">
+        <h3>IR 하이라이트</h3>
+        <div class="row"><span class="muted">실적발표</span><strong>2025 Q2</strong></div>
+        <div class="row"><span class="muted">주요 이벤트</span><strong>애널리스트 콜</strong></div>
+        <div class="row"><span class="muted">자료</span><strong>PPT / 공시</strong></div>
+        <a class="btn" style="margin-top:12px; border-color:var(--line)" href="#">IR 바로가기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Presence -->
+  <section class="section">
+    <div class="container world">
+      <div class="map" data-aos="zoom-in">Map / Illustration</div>
+      <div class="locations" data-aos="fade-up">
+        <div class="loc"><strong>인천, KR</strong><span class="muted">R&D / 제조</span></div>
+        <div class="loc"><strong>보스턴, US</strong><span class="muted">BD / 생산</span></div>
+        <div class="loc"><strong>바젤, CH</strong><span class="muted">유럽 허브</span></div>
+        <div class="loc"><strong>싱가포르, SG</strong><span class="muted">APAC 물류</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers CTA -->
+  <section class="ctaBand" id="careers">
+    <div class="container wrap" data-aos="fade-up">
+      <div>
+        <h3 style="margin:0 0 6px">함께 성장할 동료를 찾습니다</h3>
+        <p class="muted" style="margin:0;color:#0b3b27">연구·제조·품질·사업개발 등 전 직군 채용 중</p>
+      </div>
+      <a class="btn" style="background:#072a1b; color:#b7ffe2" href="#">채용 공고 보기</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="grid" style="margin-bottom:16px">
+        <div>
+          <div class="brand" style="color:#fff"><span class="logo"></span><span>YourBrand</span></div>
+          <p class="muted" style="color:#9fb2c7; margin:10px 0 0">고객센터 · 사업제휴 · 미디어 문의: contact@yourbrand.co</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start; justify-content:flex-end">
+          <a class="btn" style="height:38px; background:#111827; color:#cfd8e3; border-color:#1f2937" href="#">IR</a>
+          <a class="btn" style="height:38px; background:#111827; color:#cfd8e3; border-color:#1f2937" href="#">ESG</a>
+          <a class="btn" style="height:38px; background:#111827; color:#cfd8e3; border-color:#1f2937" href="#">문의</a>
+        </div>
+      </div>
+      <small>© <span id="y"></span> YourBrand Corp. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Swiper
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 1.15,
+      spaceBetween: 12,
+      loop: true,
+      grabCursor: true,
+      autoplay: { delay: 3200, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: {
+        560: { slidesPerView: 1.5 },
+        860: { slidesPerView: 2.2 },
+        1200:{ slidesPerView: 2.8 }
+      }
+    });
+
+    // AOS
+    AOS.init({ once:true, duration:600, easing:'ease-out-quart' });
+
+    // Mobile Drawer (간단 토글)
+    const body = document.body;
+    const drawer = document.querySelector('.drawer');
+    const navHtml = `
+      <div class="sheet" role="dialog" aria-modal="true">
+        <button class="close" aria-label="메뉴 닫기">×</button>
+        <a href="#about">회사소개</a>
+        <a href="#business">사업/제품</a>
+        <a href="#news">뉴스룸</a>
+        <a href="#esg">ESG/IR</a>
+        <a href="#careers">채용</a>
+      </div>`;
+    drawer.innerHTML = navHtml;
+    drawer.addEventListener('click', (e)=>{
+      if(e.target.classList.contains('drawer') || e.target.classList.contains('close')) body.classList.remove('nav-open');
+    });
+  </script>
+  <style>
+    /* Drawer styles (inline for demo) */
+    .drawer{position:fixed; inset:0; background:rgba(2,6,23,.35); backdrop-filter:saturate(140%) blur(4px); display:none}
+    .drawer .sheet{position:absolute; right:0; top:0; width:min(80vw, 340px); height:100%; background:#fff; border-left:1px solid var(--line); padding:20px; display:grid; align-content:flex-start; gap:6px}
+    .drawer .sheet a{padding:14px 10px; border-radius:10px; font-weight:700}
+    .drawer .sheet a:hover{background:#f7fafc; color:#0a3f2a}
+    .drawer .sheet .close{justify-self:end; width:36px; height:36px; border:1px solid var(--line); border-radius:10px; background:#fff}
+    body.nav-open{overflow:hidden}
+    body.nav-open .drawer{display:block}
+  </style>
+</body>
+</html>

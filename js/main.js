@@ -11,7 +11,7 @@ window.addEventListener('scroll', onScroll, { passive: true });
 const modal = document.getElementById('imgModal');
 const modalImg = document.getElementById('modalImage');
 const captionEl = document.getElementById('modalCaption');
-const galleryImgs = Array.from(document.querySelectorAll('#portfolioGallery img'));
+const galleryImgs = Array.from(document.querySelectorAll('#portfolio .gallery img'));
 let currentIndex = -1;
 
 // 안전한 모듈로 (음수 지원)
@@ -75,56 +75,63 @@ window.changeImage = changeImage;
 })();
 
 // === 모바일 스와이프 제스처(선택) ===
-let touchStartX = 0, touchStartY = 0;
-const SWIPE_THRESHOLD = 40; // px
-modalImg.addEventListener('touchstart', e => {
-  const t = e.touches[0];
-  touchStartX = t.clientX; touchStartY = t.clientY;
-}, { passive:true });
-modalImg.addEventListener('touchend', e => {
-  const t = e.changedTouches[0];
-  const dx = t.clientX - touchStartX;
-  const dy = t.clientY - touchStartY;
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD){
-    changeImage(dx > 0 ? -1 : 1);
-  }
-}, { passive:true });
+if (modalImg) {  // ← 가드 추가
+  let touchStartX = 0, touchStartY = 0;
+  const SWIPE_THRESHOLD = 40; // px
+  modalImg.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    touchStartX = t.clientX; touchStartY = t.clientY;
+  }, { passive:true });
+  modalImg.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD){
+      changeImage(dx > 0 ? -1 : 1);
+    }
+  }, { passive:true });
+}
 
-// 햄버거 메뉴 & 오버레이
+// 햄버거 메뉴 (오버레이 제거 버전)
 const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-const navOverlay = document.querySelector('.nav-overlay');
+const navLinks  = document.querySelector('.nav-links');
 
 function openMenu(){
   navLinks.classList.add('show');
-  navOverlay.classList.add('show');
-  navToggle.setAttribute('aria-expanded','true');
-  document.body.style.overflow='hidden';
+  navToggle?.setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';
 }
 function closeMenu(){
   navLinks.classList.remove('show');
-  navOverlay.classList.remove('show');
-  navToggle.setAttribute('aria-expanded','false');
-  document.body.style.overflow='';
+  navToggle?.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
 }
 
 navToggle?.addEventListener('click', ()=>{
   (navLinks.classList.contains('show') ? closeMenu : openMenu)();
 });
-navOverlay?.addEventListener('click', closeMenu);
 
-// 모바일에서 링크 클릭하면 닫기
-navLinks?.querySelectorAll('a').forEach(a=>{
+// 메뉴 항목 클릭 시 닫기
+navLinks?.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', closeMenu);
 });
 
-// 리사이즈 시 상태 초기화(데스크탑 복귀 시 열림상태 제거)
-const BREAKPOINT = 768;
-window.addEventListener('resize', () => {
-  if (window.innerWidth > BREAKPOINT) {
-    closeMenu();
-  }
+// 바깥 클릭 시 닫기 (오버레이 없이)
+document.addEventListener('click', (e)=>{
+  if (!navLinks?.classList.contains('show')) return;
+  if (!e.target.closest('.nav')) closeMenu();
+}, true);
+
+// ESC로 닫기
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'Escape' && navLinks?.classList.contains('show')) closeMenu();
 });
+
+// 리사이즈 시 초기화
+const BREAKPOINT = 768;
+window.addEventListener('resize', ()=>{
+  if (window.innerWidth > BREAKPOINT) closeMenu();
+}, { passive:true });
 
 // 포트폴리오 섹션 도달 시, 모바일에서 힌트 1회 표시
 (function(){
@@ -338,5 +345,69 @@ window.addEventListener('resize', () => {
   }
   apply();
   window.addEventListener('resize', apply, { passive: true });
+})();
+
+/* === Process: 모바일 전용 아코디언 (하나만 열림) === */
+(function(){
+  const MQ = '(max-width:700px)';
+  const mql = window.matchMedia(MQ);
+
+  const container = document.querySelector('.process .steps');
+  if(!container) return;
+
+  const steps = Array.from(container.querySelectorAll('.step'));
+  if(!steps.length) return;
+
+  // 번호(auto) 채우기
+  steps.forEach((el, i) => {
+    if(!el.dataset.step){
+      el.dataset.step = String(i+1).padStart(2,'0'); // 01, 02...
+    }
+  });
+
+  function onClick(e){
+    const step = e.currentTarget;
+    // 이미 열려있으면 무시 (항상 하나는 열려있게 유지)
+    if(!step.classList.contains('collapsed')) return;
+
+    steps.forEach(s => s.classList.add('collapsed'));
+    step.classList.remove('collapsed');
+  }
+
+  function enableMobile(){
+    // 초기 상태: 첫 카드만 열림, 나머지는 닫힘
+    steps.forEach((s, i) => {
+      if(i === 0) s.classList.remove('collapsed');
+      else s.classList.add('collapsed');
+      s.addEventListener('click', onClick);
+    });
+  }
+
+  function disableMobile(){
+    // 바인딩 해제 + PC 원래 모양으로 복귀 (접힘 클래스 제거)
+    steps.forEach(s => {
+      s.removeEventListener('click', onClick);
+      s.classList.remove('collapsed');
+    });
+  }
+
+  function apply(){
+    if(mql.matches) enableMobile();
+    else disableMobile();
+  }
+
+  apply();
+  mql.addEventListener('change', apply);
+})();
+
+/* 모바일 프로세스: 닫힌 바 제목 세로 표시용 data-title 자동 주입 */
+(function(){
+  const steps = document.querySelectorAll('#process .step');
+  steps.forEach(el => {
+    if(!el.dataset.title){
+      const t = el.querySelector('h3')?.textContent?.trim();
+      if(t) el.dataset.title = t;
+    }
+  });
 })();
 
