@@ -206,7 +206,7 @@ if (colorWrap && hexInput && hexPicker){
 })();
 
 // ====== Google Sheets 전송 ======
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbz-Nnghn0GlTe3TOyiyFXWsIjlrlAlS8F-63Jh3iuUed5vdF-EYxb9slKrm5nuWwUYsYg/exec';
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw4ef67Rv9UvcUqon7ixq8xxVGLKMP5FZZYoZxEef6vtp3ZYOqX5Wpi1d0foBM9aWlmnw/exec';
 
 function collectPayload(){
   const pickChecked = (sel) => [...document.querySelectorAll(sel+':checked')].map(i=>i.value);
