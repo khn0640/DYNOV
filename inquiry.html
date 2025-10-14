@@ -1,340 +1,283 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>견적 문의 · 디노브(DYNOV)</title>
-  <meta name="description" content="프레젠테이션·마케팅 비주얼·브랜딩 제작 견적 문의" />
-  <meta property="og:image" content="images/og-cover.png" />
-  <link rel="icon" href="images/favicon.png" />
-  <meta name="format-detection" content="telephone=no,email=no,address=no" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- 공통 스타일 + 문의 전용 -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/inquiry.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적 문의 - DYNOV Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
 </head>
 <body>
-  <a href="#inquiry" class="skip">본문으로 건너뛰기</a>
 
-  <nav class="nav" aria-label="주요 내비게이션">
-    <a class="brand" href="index.html#top" aria-label="DYNOV 홈">
-      <img src="images/slogun.svg" alt="슬로건">
-    </a>
-    <button class="nav-toggle" aria-label="메뉴 열기/닫기" aria-expanded="false">☰</button>
-    <div class="nav-links" role="navigation">
-      <a href="index.html#portfolio" class="link">포트폴리오</a>
-      <a href="index.html#process" class="link">프로세스</a>
-      <a href="index.html#guide" class="link">의뢰가이드</a>
-      <a href="index.html#faq" class="link">FAQ</a>
-      <a class="cta" href="inquiry.html" rel="noopener noreferrer">견적 문의</a>
-    </div>
-    <!-- 모바일 오버레이 (main.js와 호환) -->
-    <div class="nav-overlay" aria-hidden="true"></div>
-  </nav>
-
-  <!-- 상단 로고 밴드 -->
-  <div class="logo-banner" aria-hidden="true">
-    <img src="images/DYNOV_logo1.svg" alt="DYNOV" width="220" height="60">
-  </div>
-
-  <header class="hero" role="banner">
-    <div class="kicker">AI 기반, 효율적 프로세스와 높은 완성도</div>
-    <h1 class="title">견적 문의</h1>
-    <p class="sub">간단한 아이디어만 있어도 괜찮습니다. 목적과 메시지에 맞춘 형태로 빠르게 제안드립니다.</p>
-  </header>
-
-  <main id="inquiry" class="wrap" aria-label="견적 문의 양식">
-    <h2 class="bar-title">프로젝트 정보</h2>
-    <div class="panel">
-      <form id="inquiryForm" novalidate>
-        <div class="grid">
-          <div>
-            <label class="req" for="projectType">프로젝트 유형</label>
-            <div class="choices" id="projectType" role="group" aria-label="프로젝트 유형">
-              <label class="chip">
-                <input type="checkbox" name="type" value="presentation">
-                프레젠테이션
-                <div class="tooltip top">기획·디자인 포함 맞춤 발표자료 (기업/IR/세일즈 등)</div>
-              </label>
-              <label class="chip">
-                <input type="checkbox" name="type" value="marketing">
-                마케팅 디자인
-                <div class="tooltip top">배너·카드뉴스·SNS·랜딩용 소재 등 캠페인 제작</div>
-              </label>
-              <label class="chip">
-                <input type="checkbox" name="type" value="branding">
-                브랜딩
-                <div class="tooltip top">로고·키비주얼·가이드·타이포/컬러 시스템</div>
-              </label>
-              <label class="chip">
-                <input type="checkbox" name="type" value="package">
-                패키지
-                <div class="tooltip top">제품 패키지·라벨·인쇄물·굿즈</div>
-              </label>
-              <label class="chip">
-                <input type="checkbox" name="type" value="3d">
-                3D 비주얼
-                <div class="tooltip top">제품/공간 3D 모델링·렌더·합성</div>
-              </label>
-              <label class="chip">
-                <input type="checkbox" name="type" value="2d">
-                키 비주얼
-                <div class="tooltip top">광고/캠페인 메인 비주얼 및 응용</div>
-              </label>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/DYNOV_logo_black.svg" alt="DYNOV Design Logo"></a>
             </div>
-            <p class="help">※ 중복 선택이 가능합니다.</p>
-          </div>
-
-          <div>
-            <label for="pages">예상 분량</label>
-            <input id="pages" name="pages" type="text" placeholder="예: 프레젠테이션 20p / 배너 5종" />
-          </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#about">ABOUT</a></li>
+                    <li><a href="index.html#process">PROCESS</a></li>
+                    <li><a href="index.html#portfolio">PORTFOLIO</a></li>
+                    <li><a href="index.html#services">SERVICES</a></li>
+                    <li><a href="inquiry.html">CONTACT</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
+    </header>
 
-        <div>
-          <label class="req" for="scope">의뢰 범위/요청사항</label>
-          <textarea id="scope" name="scope" placeholder="페이지 구조, 최신 원고, 포함 데이터/이미지, 필요한 산출물"></textarea>
-          <div class="error" data-for="scope">의뢰 범위를 간단히라도 작성해 주세요.</div>
-        </div>
-
-        <div>
-          <label for="toneMood">톤 & 무드 <span class="help">최대 2개까지 선택</span></label>
-          <div class="choices" id="toneMood" role="group" aria-label="톤앤무드 선택">
-            <label class="chip"><input type="checkbox" name="toneMood" value="minimal_clean"> 미니멀 / 클린</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="modern_simple"> 모던 / 심플</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="premium_luxury"> 프리미엄 / 럭셔리</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="friendly"> 친근한</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="dynamic"> 다이내믹</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="unique"> 유니크</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="retro"> 레트로</label>
-            <label class="chip"><input type="checkbox" name="toneMood" value="unsure"> 잘 모르겠어요(추천받기)</label>
-          </div>
-        </div>
-
-        <!-- Preferred Color -->
-        <div>
-          <label for="colorTone">선호 컬러 (이미지 톤) <span class="help">단일 선택</span></label>
-          <div class="choices condense" id="colorTone" role="group" aria-label="선호 컬러(이미지 톤)">
-            <!-- (기존 라벨들 그대로) -->
-            <label class="chip"><input type="radio" name="colorTone" value="modern"><div class="mc"><span style="background:#000000"></span><span style="background:#666666"></span><span style="background:#FFFFFF"></span></div>모던한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="cute"><div class="mc"><span style="background:#FFE6E6"></span><span style="background:#FFF4B2"></span><span style="background:#E6F2FF"></span></div>귀여운</label>
-            <label class="chip"><input type="radio" name="colorTone" value="natural"><div class="mc"><span style="background:#6FBF73"></span><span style="background:#A5D6A7"></span><span style="background:#C8E6C9"></span></div>내추럴한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="clean"><div class="mc"><span style="background:#FFFFFF"></span><span style="background:#E3F2FD"></span><span style="background:#F1F8E9"></span></div>깨끗한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="fancy"><div class="mc"><span style="background:#FF2D7A"></span><span style="background:#8E44AD"></span><span style="background:#FFC300"></span></div>화려한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="elegant"><div class="mc"><span style="background:#C8B6A6"></span><span style="background:#EADBC8"></span><span style="background:#B08968"></span></div>우아한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="dignified"><div class="mc"><span style="background:#2F3A46"></span><span style="background:#455A64"></span><span style="background:#263238"></span></div>점잖은</label>
-            <label class="chip"><input type="radio" name="colorTone" value="noble"><div class="mc"><span style="background:#3E2723"></span><span style="background:#1B5E20"></span><span style="background:#4E342E"></span></div>고상한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="mild"><div class="mc"><span style="background:#E6E6FA"></span><span style="background:#F8BBD0"></span><span style="background:#FFE0B2"></span></div>온화한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="subtle"><div class="mc"><span style="background:#CFD8DC"></span><span style="background:#D7CCC8"></span><span style="background:#B0BEC5"></span></div>은은한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="cheerful"><div class="mc"><span style="background:#FF8A00"></span><span style="background:#FFD200"></span><span style="background:#FF3D00"></span></div>경쾌한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="dynamic"><div class="mc"><span style="background:#FF6B00"></span><span style="background:#0066FF"></span><span style="background:#00C2FF"></span></div>다이내믹한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="romantic"><div class="mc"><span style="background:#F8BBD0"></span><span style="background:#FFDDEB"></span><span style="background:#FFCDD2"></span></div>로맨틱한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="luxury"><div class="mc"><span style="background:#4A148C"></span><span style="background:#311B92"></span><span style="background:#1A237E"></span></div>럭셔리한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="fresh"><div class="mc"><span style="background:#64FFDA"></span><span style="background:#1DE9B6"></span><span style="background:#00BFA5"></span></div>상쾌한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="calm"><div class="mc"><span style="background:#BBDEFB"></span><span style="background:#90CAF9"></span><span style="background:#64B5F6"></span></div>차분한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="warm"><div class="mc"><span style="background:#FFCC80"></span><span style="background:#FFB74D"></span><span style="background:#FFA726"></span></div>따뜻한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="cool"><div class="mc"><span style="background:#B3E5FC"></span><span style="background:#81D4FA"></span><span style="background:#4FC3F7"></span></div>시원한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="classic"><div class="mc"><span style="background:#3E2723"></span><span style="background:#5D4037"></span><span style="background:#795548"></span></div>클래식한</label>
-            <label class="chip"><input type="radio" name="colorTone" value="vivid"><div class="mc"><span style="background:#FF1744"></span><span style="background:#FF9100"></span><span style="background:#00E5FF"></span></div>선명한</label>
-          </div>
-          <button type="button" id="colorToneToggle" aria-controls="colorTone" aria-expanded="false">더보기</button>
-
-          <div class="inline-controls">
-            <label for="customHex" style="font-weight:700; font-size:14px;">HEX</label>
-            <input type="color" id="customHexPicker" value="#000000">
-            <input type="text" id="customHex" name="customHex"
-       placeholder="#000000"
-       maxlength="7"
-       inputmode="latin"
-       autocapitalize="off"
-       autocomplete="off"
-       autocorrect="off"
-       spellcheck="false"
-       pattern="^#[0-9A-Fa-f]{6}$">
-
-          </div>
-        </div>
-
-        <div class="grid">
-          <div>
-            <label for="budget">예산 범위</label>
-            <select id="budget" name="budget">
-              <option value="">선택</option>
-              <option value="under1m">100만원 이하</option>
-              <option value="1to3m">100~300만원</option>
-              <option value="3to5m">300~500만원</option>
-              <option value="over5m">500만원 이상</option>
-              <option value="more">기타</option>
-            </select>
-          </div>
-          <div>
-            <label for="due">희망 일정</label>
-            <input id="due" name="due" type="date" />
-          </div>
-        </div>
-
-        <div>
-          <label for="fast">진행 속도</label>
-          <div class="choices" id="fast">
-            <label class="chip"><input type="radio" name="fast" value="no" checked> 일반</label>
-            <label class="chip"><input type="radio" name="fast" value="yes"> 신속(별도 협의)</label>
-          </div>
-        </div>
-
-        <div>
-          <label for="deliverables">납품 형식</label>
-          <div class="choices" id="deliverables">
-            <label class="chip"><input type="checkbox" name="deliverables" value="ppt"> PPT</label>
-            <label class="chip"><input type="checkbox" name="deliverables" value="pdf"> PDF</label>
-            <label class="chip"><input type="checkbox" name="deliverables" value="jpg"> JPG</label>
-            <label class="chip"><input type="checkbox" name="deliverables" value="png"> PNG</label>
-            <label class="chip"><input type="checkbox" name="deliverables" value="source"> 원본 편집 파일(협의)</label>
-            <label class="chip"><input type="checkbox" name="deliverables" value="template"> 템플릿/스타일 가이드</label>
-          </div>
-          <p class="help">※ 중복 선택이 가능합니다.</p>
-        </div>
-
-        <h2 class="bar-title" style="margin-top: var(--y);">연락처</h2>
-        <div class="grid">
-          <div>
-            <label class="req" for="name">이름</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="홍길동" />
-            <div class="error" data-for="name">이름을 입력해 주세요.</div>
-          </div>
-          <div>
-            <label for="company">회사/팀 (선택)</label>
-            <input id="company" name="company" type="text" placeholder="회사명 또는 팀명" />
-          </div>
-          <div>
-            <label class="req" for="email">이메일</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
-            <div class="error" data-for="email">올바른 이메일을 입력해 주세요.</div>
-          </div>
-          <div>
-            <label class="req" for="phone">연락처</label>
-            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" />
-            <div class="error" data-for="phone">연락처를 입력해 주세요.</div>
-          </div>
-        </div>
-
-        <div class="grid">
-          <div>
-            <label for="contactPref">연락 선호</label>
-            <div class="choices" id="contactPref">
-              <label class="chip"><input type="radio" name="contactPref" value="email" checked> 이메일</label>
-              <label class="chip"><input type="radio" name="contactPref" value="phone"> 전화</label>
-              <label class="chip"><input type="radio" name="contactPref" value="kakao"> 카카오톡</label>
+    <main>
+        <section class="inquiry-hero">
+            <div class="container">
+                <p class="kicker">AI 기반, 효율적 프로세스와 높은 완성도</p>
+                <h1>견적 문의</h1>
+                <p class="sub">간단한 아이디어만 있어도 괜찮습니다. 목적과 메시지에 맞춘 형태로 빠르게 제안드립니다.</p>
             </div>
-          </div>
-          <div>
-            <label for="contactTime">가능 시간대 (선택)</label>
-<select id="contactTime" name="contactTime">
-  <option value="" selected>선택</option>
-  <option value="morning">오전 (09:00–12:00)</option>
-  <option value="lunch">점심시간 (12:00–13:00)</option>
-  <option value="afternoon">오후 (13:00–18:00)</option>
-  <option value="evening">저녁 (18:00–21:00)</option>
-  <option value="weekend">주말 가능</option>
-  <option value="anytime">아무 때나</option>
-</select>
-          </div>
+        </section>
+
+        <section class="inquiry-form-section">
+            <div class="container">
+                <form id="inquiryForm" novalidate>
+                    <h2 class="form-title">연락처 정보</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="req" for="name">이름</label>
+                            <input id="name" name="name" type="text" autocomplete="name" placeholder="홍길동" />
+                            <div class="error-msg" data-for="name">이름을 입력해 주세요.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">회사/팀 (선택)</label>
+                            <input id="company" name="company" type="text" placeholder="회사명 또는 팀명" />
+                        </div>
+                        <div class="form-group">
+                            <label class="req" for="email">이메일</label>
+                            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+                            <div class="error-msg" data-for="email">올바른 이메일을 입력해 주세요.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="req" for="phone">연락처</label>
+                            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" />
+                            <div class="error-msg" data-for="phone">연락처를 입력해 주세요.</div>
+                        </div>
+                    </div>
+
+                    <h2 class="form-title">프로젝트 정보</h2>
+                    <div class="form-group">
+                        <label class="req" for="scope">의뢰 범위 / 요청사항</label>
+                        <textarea id="scope" name="scope" placeholder="원하시는 결과물, 디자인 방향, 주요 내용, 참고자료 등 자유롭게 작성해주세요."></textarea>
+                        <div class="error-msg" data-for="scope">의뢰 범위를 간단히라도 작성해 주세요.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="req" for="projectType">프로젝트 유형</label>
+                        <div class="choices" id="projectType">
+                            <label class="chip"><input type="checkbox" name="type" value="presentation"><span>프레젠테이션</span></label>
+                            <label class="chip"><input type="checkbox" name="type" value="marketing"><span>마케팅 디자인</span></label>
+                            <label class="chip"><input type="checkbox" name="type" value="branding"><span>브랜딩</span></label>
+                            <label class="chip"><input type="checkbox" name="type" value="package"><span>패키지</span></label>
+                            <label class="chip"><input type="checkbox" name="type" value="3d"><span>3D 비주얼</span></label>
+                            <label class="chip"><input type="checkbox" name="type" value="2d"><span>키 비주얼</span></label>
+                        </div>
+                        <p class="help-text">※ 중복 선택이 가능합니다.</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="pages">예상 분량 (선택)</label>
+                            <input id="pages" name="pages" type="text" placeholder="예: 프레젠테이션 20p / 배너 5종" />
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">예산 범위 (선택)</label>
+                            <select id="budget" name="budget">
+                                <option value="">선택</option>
+                                <option value="under1m">100만원 이하</option>
+                                <option value="1to3m">100~300만원</option>
+                                <option value="3to5m">300~500만원</option>
+                                <option value="over5m">500만원 이상</option>
+                                <option value="more">기타(직접입력)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">자료 링크 (선택)</label>
+                        <input id="link" name="link" type="url" placeholder="https:// (구글드라이브/노션/웹사이트 등)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="req">
+                            <input type="checkbox" id="consent" name="consent"/>
+                            개인정보 수집·이용에 동의합니다.
+                        </label>
+                        <button type="button" class="view-btn" id="privacyOpen">자세히 보기</button>
+                        <div class="error-msg" data-for="consent">동의가 필요합니다.</div>
+                    </div>
+
+                    <div class="form-actions">
+                      <button type="submit">문의 보내기</button>
+                    </div>
+                </form><div class="success-msg" id="successMsg">
+  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+  </svg>
+  <h4>문의가 접수되었습니다</h4>
+  <p>빠르게 확인 후 회신드리겠습니다.</p>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="contact">
+        <div class="container">
+            <div class="contact-header">
+                <h2>CONTACT</h2>
+                <p>당신의 비즈니스, 다음 혁신을 위해 DYNOV와 함께하세요.</p>
+            </div>
+            
+            <div class="footer-cta">
+                <a href="https://open.kakao.com/o/sWleDI8b" target="_blank" rel="noopener noreferrer" class="btn-kakao">카카오톡 오픈채팅</a>
+                <a href="inquiry.html" class="btn-inquiry">견적 문의하기</a>
+            </div>
+
+            <div class="copyright">
+                <p><strong>DYNOV Design</strong> | contact@dynov.co.kr<br>
+                &copy; 2025 DYNOV Design. All Rights Reserved.</p>
+            </div>
         </div>
+    </footer>
 
-        <div>
-          <label for="link">자료 링크 (선택)</label>
-          <input id="link" name="link" type="url" placeholder="https:// (구글드라이브/노션/웹사이트 등)" />
+    <div id="privacyModal" class="privacy-modal" role="dialog" aria-hidden="true">
+      <div class="privacy-modal-backdrop" data-dismiss></div>
+      <div class="privacy-modal-panel" role="document">
+        <header>
+          <h2>개인정보처리방침</h2>
+          <button type="button" class="close-btn" id="privacyClose" aria-label="닫기">✕</button>
+        </header>
+        <div class="modal-body">
+            <p><strong>제1조 (개인정보의 처리 목적)</strong><br>DYNOV Design은 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br>1. 서비스 제공: 문의사항 응대, 상담, 견적 산출 및 서비스 제공을 목적으로 개인정보를 처리합니다.</p>
+            <p><strong>제2조 (개인정보의 처리 및 보유 기간)</strong><br>① 회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.<br>② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.<br>1. 서비스 제공: 서비스 공급 완료 및 요금결제·정산 완료 시까지. 다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료 시까지<br>  - 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시·광고, 계약내용 및 이행 등 거래에 관한 기록: 5년<br>  - 그 밖의 관련 법령 등</p>
+            <p><strong>제3조 (개인정보의 제3자 제공)</strong><br>회사는 정보주체의 개인정보를 제1조(개인정보의 처리 목적)에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.</p>
+            <p><strong>제4조 (정보주체와 법정대리인의 권리·의무 및 그 행사방법)</strong><br>정보주체는 회사에 대해 언제든지 개인정보 열람·정정·삭제·처리정지 요구 등의 권리를 행사할 수 있습니다. 권리 행사는 서면, 전자우편 등을 통하여 하실 수 있으며 회사는 이에 대해 지체 없이 조치하겠습니다.</p>
+            <p><strong>제5조 (처리하는 개인정보의 항목)</strong><br>회사는 다음의 개인정보 항목을 처리하고 있습니다.<br>1. 필수항목: 이름, 이메일, 연락처<br>2. 선택항목: 회사/팀명, 프로젝트 관련 정보</p>
+            <p><strong>제6조 (개인정보의 파기)</strong><br>회사는 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다. 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.</p>
+            <p><strong>제7조 (개인정보 보호책임자)</strong><br>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.<br>- 성명 : 김한나<br>- 연락처 : contact@dynov.co.kr</p>
         </div>
-
-        <div>
-          <label for="ref">유입 경로 (선택)</label>
-          <select id="ref" name="ref">
-            <option value="">선택</option>
-            <option value="search">검색</option>
-            <option value="soomgo">숨고</option>
-            <option value="sns">SNS</option>
-            <option value="reco">지인 추천</option>
-            <option value="etc">기타</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="req" style="display:flex; align-items:center; gap:8px; font-weight:700">
-            <input type="checkbox" id="consent" />
-            개인정보 수집·이용에 동의합니다.
-          </label>
-
-          <button type="button" class="view-btn" id="privacyOpen" aria-haspopup="dialog" aria-controls="privacyModal" aria-expanded="false" style="margin-top:6px">
-            자세히 보기
-          </button>
-
-          <div class="error" data-for="consent">동의가 필요합니다.</div>
-        </div>
-
-        <div class="actions">
-          <a class="ghost" href="https://open.kakao.com/o/sWleDI8b" target="_blank" rel="noopener noreferrer">카카오톡으로 빠른 문의</a>
-          <button type="submit">문의 보내기</button>
-        </div>
-
-        <div class="success" id="successMsg" role="status" aria-live="polite">
-          문의가 접수되었습니다. 빠르게 회신드릴게요!
-        </div>
-      </form>
-    </div>
-  </main>
-
-  <footer>© 2025 DYNOV. All rights reserved.</footer>
-
-  <!-- 개인정보 수집·이용 안내 모달 -->
-  <div id="privacyModal" class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" aria-hidden="true">
-    <div class="privacy-modal__backdrop" data-dismiss></div>
-    <div class="privacy-modal__panel" role="document" tabindex="-1">
-      <header class="privacy-modal__header">
-        <h2 id="privacyTitle">개인정보 수집·이용 안내</h2>
-        <button type="button" class="privacy-modal__close" id="privacyClose" aria-label="닫기">✕</button>
-      </header>
-
-      <div class="privacy-modal__body">
-        <p><strong>1. 수집 항목</strong><br>
-          - 이름, 이메일, 연락처 (필수)<br>
-          - 서비스 이용 과정에서 자동 수집 정보(쿠키, 접속 IP 등)
-        </p>
-        <p><strong>2. 수집 및 이용 목적</strong><br>
-          - 문의사항 응대 및 서비스 제공<br>
-          - 계약 이행 및 서비스 품질 개선
-        </p>
-        <p><strong>3. 보유 및 이용 기간</strong><br>
-          - 수집일로부터 1년 보관 후 지체 없이 파기<br>
-          - 단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관
-        </p>
-        <p><strong>4. 동의 거부권 및 불이익</strong><br>
-          - 개인정보 제공을 거부할 권리가 있습니다.<br>
-          - 다만, 거부 시 서비스 이용에 제한이 있을 수 있습니다.
-        </p>
-        <p><strong>5. 제3자 제공</strong><br>
-          - 당사는 원칙적으로 수집한 개인정보를 외부에 제공하지 않습니다.<br>
-          - 다만, 법령에 의거하거나 이용자의 동의를 받은 경우 예외적으로 제공될 수 있습니다.
-        </p>
-        <p><strong>6. 처리 위탁</strong><br>
-          - 원활한 서비스 제공을 위해 일부 업무를 외부에 위탁할 수 있으며,<br>
-          - 이 경우 개인정보 보호 관련 법령에 따라 위탁계약을 체결하고 안전하게 관리합니다.<br>
-          - 현재: 구글(Google LLC) — Google Sheets 및 Apps Script 기반 데이터 저장·처리
-        </p>
-        <p><strong>7. 파기 방법</strong><br>
-          - 전자적 파일 형태: 복구 불가능한 기술적 방법으로 삭제<br>
-          - 종이 출력물: 분쇄 또는 소각을 통해 파기
-        </p>
+        <footer>
+            <button type="button" class="btn-secondary" data-dismiss>닫기</button>
+            <button type="button" class="btn-primary" id="privacyAgree">동의하고 닫기</button>
+        </footer>
       </div>
-
-      <footer class="privacy-modal__footer">
-  <button type="button" class="btn ghost" data-dismiss>닫기</button>
-  <button type="button" class="btn primary" id="privacyAgree">동의하고 닫기</button>
-</footer>
     </div>
-  </div>
 
-  <!-- 공통 스크립트 + 문의 전용 스크립트 -->
-  <script src="js/main.js" defer></script>
-  <script src="js/inquiry.js" defer></script>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 칩(chip) 선택 기능 ---
+        document.querySelectorAll('.chip input').forEach(input => {
+            input.addEventListener('change', () => {
+                input.closest('.chip').classList.toggle('is-checked', input.checked);
+            });
+        });
+
+        // --- 개인정보 모달 ---
+        const openBtn = document.getElementById('privacyOpen');
+        const modal = document.getElementById('privacyModal');
+        if (openBtn && modal) {
+            const closeBtn = document.getElementById('privacyClose');
+            const dismissEls = modal.querySelectorAll('[data-dismiss]');
+            const agreeBtn = document.getElementById('privacyAgree');
+            const consentCheck = document.getElementById('consent');
+
+            const openModal = () => modal.style.display = 'block';
+            const closeModal = () => modal.style.display = 'none';
+
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            dismissEls.forEach(el => el.addEventListener('click', closeModal));
+            
+            agreeBtn.addEventListener('click', () => {
+                if(consentCheck) consentCheck.checked = true;
+                const err = document.querySelector('[data-for="consent"]');
+                if (err) err.style.display = 'none';
+                closeModal();
+            });
+        }
+
+        // --- Google Sheets 전송 ---
+        const form = document.getElementById('inquiryForm');
+        if (form) {
+            const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw4ef67Rv9UvcUqon7ixq8xxVGLKMP5FZZYoZxEef6vtp3ZYOqX5Wpi1d0foBM9aWlmnw/exec';
+            const successMsg = document.getElementById('successMsg');
+
+            function setError(id, on) {
+                const el = document.querySelector(`[data-for="${id}"]`);
+                if (el) el.style.display = on ? 'block' : 'none';
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // 유효성 검사
+                let ok = true;
+                ['scope', 'name', 'email', 'phone', 'consent'].forEach(id => setError(id, false)); // 초기화
+
+                if (!document.getElementById('name').value.trim()) { setError('name', true); ok = false; }
+                if (!document.getElementById('scope').value.trim()) { setError('scope', true); ok = false; }
+                if (!document.getElementById('phone').value.trim()) { setError('phone', true); ok = false; }
+                const emailField = document.getElementById('email');
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) { setError('email', true); ok = false; }
+                const consentField = document.getElementById('consent');
+                if (!consentField.checked) { setError('consent', true); ok = false; }
+                
+                if (!ok) return;
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const oldText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = '전송 중...';
+
+                try {
+                    const payload = {
+                        timestamp: new Date().toISOString(),
+                        projectType: [...form.querySelectorAll('[name="type"]:checked')].map(i => i.value).join(', '),
+                        pages: form.querySelector('#pages').value,
+                        scope: form.querySelector('#scope').value,
+                        name: form.querySelector('#name').value,
+                        company: form.querySelector('#company').value,
+                        email: form.querySelector('#email').value,
+                        phone: form.querySelector('#phone').value,
+                        link: form.querySelector('#link').value,
+                        budget: form.querySelector('#budget').value,
+                        consent: form.querySelector('#consent').checked,
+                    };
+                    
+                    await fetch(WEBAPP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        cache: 'no-cache',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    successMsg.style.display = 'block';
+                    form.style.display = 'none';
+
+                } catch (err) {
+                    alert('네트워크 오류로 전송하지 못했습니다.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = oldText;
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>

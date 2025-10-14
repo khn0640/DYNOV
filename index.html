@@ -1,406 +1,309 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>디노브(DYNOV)</title>
-  <meta name="description" content="AI 기반 프레젠테이션과 마케팅 비주얼을 빠르고 고퀄리티로 제작하는 온라인 전용 스튜디오." />
-  <meta name="format-detection" content="telephone=no,email=no,address=no" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="디노브(DYNOV) 디자인" />
-  <meta property="og:description" content="프레젠테이션·마케팅 비주얼 전문. 온라인 전용, 빠른 제작, 고퀄리티 납품." />
-  <meta property="og:image" content="images/og-cover.png" />
-  <link rel="icon" href="images/favicon.png" />
-  <meta name="theme-color" content="#0a1121" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNOV Design - Graphic Design Partner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 </head>
 <body>
 
-  <a href="#portfolio" class="skip">본문으로 건너뛰기</a>
-
-  <nav class="nav" aria-label="주요 내비게이션">
-    <a class="brand" href="#top" aria-label="DYNOV 홈" style="display:inline-flex;align-items:center;">
-      <img src="images/slogun.svg" alt="슬로건">
-    </a>
-
-    <!-- 햄버거 버튼 (모바일 전용) -->
-    <button class="nav-toggle" aria-label="메뉴 열기/닫기" aria-expanded="false">☰</button>
-
-    <!-- 네비 링크 -->
-    <div class="nav-links" role="navigation">
-      <a href="#portfolio" class="link">포트폴리오</a>
-      <a href="#process" class="link">프로세스</a>
-      <a href="#guide" class="link">의뢰가이드</a>
-      <a href="#faq" class="link">FAQ</a>
-      <a class="cta" href="inquiry.html" rel="noopener noreferrer">견적 문의</a>
-    </div>
-
-    <!-- 모바일 반투명 오버레이 -->
-    <div class="nav-overlay" aria-hidden="true"></div>
-  </nav>
-
-  <header id="top" class="hero" role="banner">
-    <div>
-      <img class="logo hero-logo" src="images/DYNOV_logo_black.svg" alt="디노브(DYNOV) 로고"/>
-      <div class="kicker">AI 기반, 효율적 프로세스와 높은 완성도</div>
-      <h2 class="title">AI × 디자인, 브랜드 스토리를 전략적으로</h2>
-      <p class="sub">프레젠테이션·마케팅 비주얼·브랜드 에셋을 목적에 맞춰 일관된 룩앤필로 설계합니다.</p>
-      <a href="inquiry.html" class="hero-cta">빠른 견적 문의</a>      
-    </div>
-  </header>
-
-  <section id="portfolio" aria-label="포트폴리오">
-    <h2>포트폴리오</h2>
-    <div class="swipe-hint" aria-hidden="true">
-      <span class="txt">옆으로 넘겨보세요</span>
-      <svg class="chev" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-        <path d="M8 4l8 8-8 8" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="gallery" id="portfolioGallery">
-      <div class="tile">
-        <img src="images/pf001.png" alt="브로슈어 / 편집 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">브로슈어 / 편집 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf002.png" alt="캐릭터 / 굿즈 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">캐릭터 / 굿즈 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf003.png" alt="공간 연출·3D 래퍼런스" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">공간 연출·3D 래퍼런스</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf004.png" alt="기업 홍보 브로슈어" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">기업 홍보 브로슈어</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf005.png" alt="브랜딩 & 패키지 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">브랜딩 & 패키지 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf006.png" alt="브랜딩 아이덴티티" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">브랜딩 아이덴티티</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf007.png" alt="캐릭터 / 굿즈 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">캐릭터 / 굿즈 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf008.png" alt="기업홍보자료 브로슈어 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">기업홍보자료 브로슈어 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf009.png" alt="프로모션 리플렛 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">프로모션 리플렛 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf010.png" alt="브랜딩 & 패키지 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">브랜딩 & 패키지 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf011.png" alt="제품 브로슈어 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">제품 브로슈어 디자인</div>
-      </div>
-      <div class="tile">
-        <img src="images/pf012.png" alt="기업홍보 리플렛 디자인" loading="lazy" decoding="async" onclick="openModal(this)" width="1200" height="673">
-        <div class="overlay">기업홍보 리플렛 디자인</div>
-      </div>
-    </div>
-  </section>
-  <section id="services" class="section services" aria-label="서비스 소개">
-  <h2>서비스 소개</h2>
-  <p class="lead">브랜드의 목표와 메시지에 맞춘 맞춤형 디자인 서비스를 제공합니다.</p>
-
-  <div class="service-grid">
-    <!-- 브랜딩 패키지 -->
-    <article class="service-card">
-      <div class="overlay">
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 22a9.97 9.97 0 0 0 7.09-2.91 9.97 9.97 0 0 0 2.91-7.09c0-5.52-4.48-10-10-10S2 6.48 2 12a10 10 0 0 0 10 10Z"/>
-            <circle cx="8" cy="8" r="1.5"/>
-            <circle cx="16" cy="8" r="1.5"/>
-            <circle cx="12" cy="12" r="1.5"/>
-          </svg>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/DYNOV_logo_black.svg" alt="DYNOV Design Logo"></a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#process">PROCESS</a></li>
+                    <li><a href="#portfolio">PORTFOLIO</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
-        <h3>브랜딩 패키지</h3>
-        <p>로고, 컬러, 톤앤매너 가이드 제작</p>
-      </div>
-    </article>
+    </header>
 
-    <!-- 시각디자인 -->
-    <article class="service-card">
-      <div class="overlay">
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <line x1="3" y1="9" x2="21" y2="9"/>
-            <line x1="9" y1="21" x2="9" y2="9"/>
-          </svg>
-        </div>
-        <h3>시각디자인</h3>
-        <p>편집 · 포스터 · 홍보물 등 디자인</p>
-      </div>
-    </article>
+    <main>
+        <section class="hero" style="background-image: url('images/hero-bg.jpg');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="fade-in">We Design, You Innovate.</h1>
+                <p class="fade-in">AI × 디자인, 브랜드 스토리를 전략적으로 시각화합니다.</p>
+            </div>
+        </section>
 
-    <!-- 마케팅 비주얼 -->
-    <article class="service-card">
-      <div class="overlay">
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M3 11v2a1 1 0 0 0 1 1h3l4 5V5l-4 5H4a1 1 0 0 0-1 1Z"/>
-            <path d="M16 8v8a4 4 0 0 0 0-8Z"/>
-          </svg>
-        </div>
-        <h3>마케팅 비주얼</h3>
-        <p>PPT, SNS, 캠페인 · 키비주얼 제작</p>
-      </div>
-    </article>
+        <section id="about" class="about-us">
+            <div class="container grid-2">
+                <div class="about-text reveal">
+                    <h2>WHAT WE DO</h2>
+                    <p>프레젠테이션, 마케팅 비주얼, 브랜드 에셋을 목적에 맞춰 일관된 룩앤필로 설계합니다.</p>
+                    <ul class="core-services">
+                        <li>✔️ AI 기반 프레젠테이션 디자인</li>
+                        <li>✔️ 전략적 마케팅 비주얼 제작</li>
+                        <li>✔️ 일관된 브랜드 에셋 시스템 구축</li>
+                        <li>✔️ 매력적인 브랜드 스토리텔링</li>
+                    </ul>
+                </div>
+                <div class="about-image reveal">
+                    <img src="images/about-image.jpg" alt="Online service illustration">
+                </div>
+            </div>
+        </section>
 
-    <!-- 디자인 컨설팅 -->
-    <article class="service-card">
-      <div class="overlay">
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="lucide" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <path d="M7 7h10M7 12h6M7 17h8"/>
-          </svg>
-        </div>
-        <h3>디자인 컨설팅</h3>
-        <p>기존 디자인 리뷰 및 리뉴얼 제안</p>
-      </div>
-    </article>
-  </div>
-</section>
+        <section id="process" class="process">
+            <div class="container reveal">
+                <h2>Our Process</h2>
+                <p class="subtitle">체계적인 프로세스로 최상의 결과물을 만듭니다.</p>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </div>
+                        <div class="step-number">01</div>
+                        <h3>진단 및 목표 설정</h3>
+                        <p>디자인의 목적과 타겟을 분석하여 명확한 목표를 설정합니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13a6 6 0 0 0-6-6 6 6 0 0 0-6 6"></path><path d="M21 21A6 6 0 0 0 15 15"></path><path d="M3 21a6 6 0 0 1 6-6"></path><path d="M12 7V1"></path><path d="m10 3 2-2 2 2"></path></svg>
+                        </div>
+                        <div class="step-number">02</div>
+                        <h3>전략 설계</h3>
+                        <p>설정된 목표에 맞춰 메시지를 가장 효과적으로 전달할 시각 전략을 설계합니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <div class="step-number">03</div>
+                        <h3>디자인 및 피드백</h3>
+                        <p>피드백을 반영하여 디자인의 완성도를 높여나갑니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="step-number">04</div>
+                        <h3>최종 결과물 전달</h3>
+                        <p>완성된 결과물을 활용 목적에 맞게 최적화하여 전달합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section id="portfolio" class="portfolio">
+            <div class="container reveal">
+                <h2>Portfolio</h2>
+                <p class="subtitle">DYNOV Design의 아이덴티티가 담긴 결과물입니다.</p>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item"><img src="images/pf001.png" alt="Portfolio 1"><div class="item-info"><h3>프로젝트 1</h3><span>Branding</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf002.png" alt="Portfolio 2"><div class="item-info"><h3>프로젝트 2</h3><span>Key Visual</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf003.png" alt="Portfolio 3"><div class="item-info"><h3>프로젝트 3</h3><span>Presentation</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf004.png" alt="Portfolio 4"><div class="item-info"><h3>프로젝트 4</h3><span>Contents Design</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf005.png" alt="Portfolio 5"><div class="item-info"><h3>프로젝트 5</h3><span>Branding</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf006.png" alt="Portfolio 6"><div class="item-info"><h3>프로젝트 6</h3><span>Key Visual</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf007.png" alt="Portfolio 7"><div class="item-info"><h3>프로젝트 7</h3><span>Presentation</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf008.png" alt="Portfolio 8"><div class="item-info"><h3>프로젝트 8</h3><span>Contents Design</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf009.png" alt="Portfolio 9"><div class="item-info"><h3>프로젝트 9</h3><span>Branding</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf010.png" alt="Portfolio 10"><div class="item-info"><h3>프로젝트 10</h3><span>Key Visual</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf011.png" alt="Portfolio 11"><div class="item-info"><h3>프로젝트 11</h3><span>Presentation</span></div></div>
+                    <div class="portfolio-item"><img src="images/pf012.png" alt="Portfolio 12"><div class="item-info"><h3>프로젝트 12</h3><span>Contents Design</span></div></div>
+                </div>
+            </div>
+        </section>
 
-  <section id="process" class="process" aria-label="작업 프로세스">
-  <h2 id="process-title">작업 프로세스</h2>
-  <p class="lead">“아이디어는 신속하게, 디테일은 완성도 있게.”</p>
+        <section id="services" class="services">
+            <div class="container reveal">
+                <h2>SERVICE</h2>
+                <p class="subtitle">당신의 비즈니스에 필요한 핵심 디자인 솔루션을 제공합니다.</p>
+                <div class="service-grid-4">
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                        <h3>브랜딩 패키지</h3>
+                        <p>로고, 컬러, 톤앤매너 가이드 제작</p>
+                    </div>
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        <h3>시각디자인</h3>
+                        <p>편집 · 포스터 · 홍보물 등 디자인</p>
+                    </div>
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        <h3>마케팅 비주얼</h3>
+                        <p>PPT, SNS, 캠페인 · 키비주얼 제작</p>
+                    </div>
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <polyline points="8 14 11 11 13 13 16 10"></polyline>
+                        </svg>
+                        <h3>디자인 컨설팅</h3>
+                        <p>기존 디자인 리뷰 및 리뉴얼 제안</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="steps" id="processSteps" aria-labelledby="process-title">
-    <div class="step" data-step="01">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 3h18v4H3z"></path><path d="M3 9h18v12H3z"></path>
-      </svg>
-      <div>
-        <h3>프로젝트 킥오프</h3>
-        <p>브리프 공유 · 목표·타깃 정의 · 자료 맵핑</p>
-      </div>
-      <span class="step-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </span>
+        <footer id="contact" class="contact">
+            <div class="container">
+                <div class="contact-header">
+                    <h2>CONTACT</h2>
+                    <p>당신의 비즈니스, 다음 혁신을 위해 DYNOV와 함께하세요.</p>
+                </div>
+                
+                <div class="footer-cta">
+                    <a href="https://open.kakao.com/o/sWleDI8b" target="_blank" rel="noopener noreferrer" class="btn-kakao">카카오톡 오픈채팅</a>
+                    <a href="inquiry.html" class="btn-inquiry">견적 문의하기</a>
+                </div>
+
+                <div class="copyright">
+                    <p><strong>DYNOV Design</strong> | contact@dynov.co.kr<br>
+                    &copy; 2025 DYNOV Design. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+        <img class="lightbox-content" id="lightbox-img">
     </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // --- 화면 크기별 포트폴리오 기능 분리 ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            if (!portfolioGrid) return;
+            const portfolioItems = portfolioGrid.querySelectorAll('.portfolio-item');
+            let currentMode = '';
 
-    <div class="step collapsed" data-step="02">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/>
-        <path d="M20 16l.8 2.2L23 19l-2.2.8L20 22l-.8-2.2L17 19l2.2-.8L20 16z"/>
-        <path d="M4 14l.6 1.6L7 16l-1.6.6L4 19l-.6-1.6L2 16l1.6-.6L4 14z"/>
-      </svg>
-      <div>
-        <h3>콘셉트 제안</h3>
-        <p>무드보드 · 키 비주얼 방향 · 톤앤매너 가이드</p>
-      </div>
-      <span class="step-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </span>
-    </div>
+            // --- 데스크톱: 라이트박스 갤러리 ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const gallery = Array.from(portfolioItems).map(item => item.querySelector('img').src);
+            let currentIndex = 0;
 
-    <div class="step collapsed" data-step="03">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect>
-      </svg>
-      <div>
-        <h3>디자인 전개</h3>
-        <p>스타일 가이드화 · 페이지/소재 확장 · 일관성 체크</p>
-      </div>
-      <span class="step-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </span>
-    </div>
+            function showLightbox(index) {
+                currentIndex = index;
+                lightboxImg.src = gallery[currentIndex];
+                lightbox.style.display = 'flex';
+            }
+            function showNextImage() { currentIndex = (currentIndex + 1) % gallery.length; lightboxImg.src = gallery[currentIndex]; }
+            function showPrevImage() { currentIndex = (currentIndex - 1 + gallery.length) % gallery.length; lightboxImg.src = gallery[currentIndex]; }
+            function handleItemClick(e) {
+                e.preventDefault();
+                const index = Array.from(portfolioItems).indexOf(this);
+                showLightbox(index);
+            }
+            function handleKeydown(e) {
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'ArrowRight') showNextImage();
+                    if (e.key === 'ArrowLeft') showPrevImage();
+                    if (e.key === 'Escape') lightbox.style.display = 'none';
+                }
+            }
+            
+            function initLightbox() {
+                if (currentMode === 'lightbox') return;
+                currentMode = 'lightbox';
+                cleanupSlider();
+                portfolioItems.forEach(item => item.addEventListener('click', handleItemClick));
+                lightboxClose.addEventListener('click', () => lightbox.style.display = 'none');
+                lightboxNext.addEventListener('click', showNextImage);
+                lightboxPrev.addEventListener('click', showPrevImage);
+                lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+                document.addEventListener('keydown', handleKeydown);
+            }
+            
+            function cleanupLightbox() {
+                portfolioItems.forEach(item => item.removeEventListener('click', handleItemClick));
+                // lightbox 관련 이벤트 리스너는 계속 유지해도 무방
+            }
 
-    <div class="step collapsed" data-step="04">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-      </svg>
-      <div>
-        <h3>검토 및 수정</h3>
-        <p>피드백 반영 · 문구·이미지 교체 · 품질 보정</p>
-      </div>
-      <span class="step-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </span>
-    </div>
+            // --- 모바일: 무한루프 스와이프 슬라이더 ---
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            function handleTouchStart(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                portfolioGrid.style.transition = 'none';
+            }
+            function handleTouchMove(e) {
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = currentX - touchStartX;
+                const diffY = currentY - touchStartY;
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    e.preventDefault();
+                    const itemWidth = portfolioItems[0].clientWidth;
+                    portfolioGrid.style.transform = `translateX(${-currentIndex * itemWidth + diffX}px)`;
+                }
+            }
+            function handleTouchEnd(e) {
+                const touchEndX = e.changedTouches[0].clientX;
+                portfolioGrid.style.transition = 'transform 0.4s ease';
+                const diff = touchEndX - touchStartX;
+                const totalItems = portfolioItems.length;
+                if (diff < -50) {
+                    currentIndex = (currentIndex + 1) % totalItems;
+                } else if (diff > 50) {
+                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                }
+                const itemWidth = portfolioItems[0].clientWidth;
+                const offset = -currentIndex * itemWidth;
+                portfolioGrid.style.transform = `translateX(${offset}px)`;
+            }
 
-    <div class="step collapsed" data-step="05">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 4h16v16H4z"></path><path d="M8 12l2.5 2.5L16 9"></path>
-      </svg>
-      <div>
-        <h3>최종 납품</h3>
-        <p>PPT·PDF·JPG·PNG 납품 · 라이선스 표기 · 인수인계</p>
-      </div>
-    </div>
-  </div>
-</section>
+            function initSlider() {
+                if (currentMode === 'slider') return;
+                currentMode = 'slider';
+                cleanupLightbox();
+                portfolioGrid.addEventListener('touchstart', handleTouchStart, { passive: false });
+                portfolioGrid.addEventListener('touchmove', handleTouchMove, { passive: false });
+                portfolioGrid.addEventListener('touchend', handleTouchEnd);
+            }
 
-<!-- Guide -->
-<section id="guide" class="section" aria-label="의뢰 가이드">
-  <h2>의뢰 가이드</h2>
-  <p class="lead">처음 문의부터 납품까지, 아래 체크리스트만 준비하시면 더 빠르고 매끄럽게 진행됩니다.</p>
+            function cleanupSlider() {
+                portfolioGrid.removeEventListener('touchstart', handleTouchStart);
+                portfolioGrid.removeEventListener('touchmove', handleTouchMove);
+                portfolioGrid.removeEventListener('touchend', handleTouchEnd);
+                portfolioGrid.style.transform = '';
+                portfolioGrid.style.transition = '';
+            }
+            
+            // --- 실행 및 리사이즈 핸들러 ---
+            function setupPortfolio() {
+                if (window.innerWidth > 768) {
+                    initLightbox();
+                } else {
+                    initSlider();
+                }
+            }
 
-<!-- =======================
-     의뢰 가이드
-======================= -->
-<section class="guide pro">
-  <div class="item">
-    <summary>
-      <span class="badge">01</span>
-      <span class="tit">준비 자료</span>
-      <span class="sub">시작 전 체크리스트</span>
-    </summary>
-  </div>
-  <div class="item">
-    <summary>
-      <span class="badge">02</span>
-      <span class="tit">범위 일정</span>
-      <span class="sub">분량·시간·수정 기준</span>
-    </summary>
-  </div>
-  <div class="item">
-    <summary>
-      <span class="badge">03</span>
-      <span class="tit">비용 기준</span>
-      <span class="sub">난이도·범위·에셋 기준</span>
-    </summary>
-  </div>
-  <div class="item">
-    <summary>
-      <span class="badge">04</span>
-      <span class="tit">수정 정책</span>
-      <span class="sub">기본 2회</span>
-    </summary>
-  </div>
-  <div class="item">
-    <summary>
-      <span class="badge">05</span>
-      <span class="tit">파일 규정</span>
-      <span class="sub">납품 포맷·라이선스</span>
-    </summary>
-  </div>
-</section>
-</section>
-
-  <section id="faq" class="section" aria-label="자주 묻는 질문">
-    <h2>FAQ</h2>
-    <div class="faq">
-  <details>
-    <summary>원고가 정리되지 않았어도 시작 가능한가요?</summary>
-    <p>가능합니다. 초안/참고자료만 있어도 킥오프 미팅 후 구조 설계부터 함께 진행합니다.</p>
-  </details>
-
-  <details>
-    <summary>급한 일정인데 빠르게 받을 수 있나요?</summary>
-    <p>네. <strong>신속 진행 옵션</strong>으로 우선 제작 가능하며, 일정·비용은 별도 협의합니다.</p>
-  </details>
-
-  <details>
-    <summary>수정은 몇 회까지 포함되나요?</summary>
-    <p>기본 <strong>2회 수정</strong>이 포함됩니다. 단순 교체는 가능하지만, 콘셉트 변경이나 대량 증감은 추가 범위로 산정됩니다.</p>
-  </details>
-
-  <details>
-    <summary>납품 포맷은 무엇인가요?</summary>
-    <p><strong>PPT · PDF · JPG · PNG</strong> 기본 제공하며, 원본 파일은 협의 후 전달 가능합니다.</p>
-  </details>
-
-  <details>
-    <summary>견적은 어떻게 산정되나요?</summary>
-    <p><strong>페이지 수 · 난이도 · 에셋 제작 여부</strong>를 기준으로 합니다. 브랜드 가이드/모션 등은 별도 항목입니다.</p>
-  </details>
-</div>
-  </section>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "원고가 정리되지 않았어도 시작 가능한가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "가능합니다. 초안/참고자료만 있어도 킥오프 미팅 후 구조 설계부터 함께 진행합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "급한 일정인데 빠르게 받을 수 있나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "네. 신속 진행 옵션으로 우선 제작 가능하며, 일정·비용은 별도 협의합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "수정은 몇 회까지 포함되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "기본 2회 수정이 포함됩니다. 단순 교체는 가능하지만, 콘셉트 변경이나 대량 증감은 추가 범위로 산정됩니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "납품 포맷은 무엇인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "PPT · PDF · JPG · PNG 기본 제공하며, 원본 파일은 협의 후 전달 가능합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "견적은 어떻게 산정되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "페이지 수 · 난이도 · 에셋 제작 여부를 기준으로 합니다. 브랜드 가이드/모션 등은 별도 항목입니다."
-      }
-    }
-  ]
-}
-</script>
-
-  <section id="contact" class="section" aria-label="문의">
-  <div class="contact-inner">
-    <h2>당신의 생각을 디자인합니다</h2>
-    <p class="lead">아이디어의 크기와 상관없이 목적과 메시지에 맞춘 맞춤형 디자인 솔루션을 제공합니다.</p>
-    <div class="cta">
-      <a href="inquiry.html" rel="noopener noreferrer">견적 문의</a>
-      <a href="https://open.kakao.com/o/sWleDI8b" target="_blank" rel="noopener noreferrer" class="kakao">카카오톡 오픈채팅</a>
-    </div>
-  </div>
-</section>
-
-  <footer>
-  <div class="inner">
-    © 2025 DYNOV. All rights reserved.
-  </div>
-</footer>
-
-  <!-- Lightbox -->
-<div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="이미지 미리보기">
-  <button class="close" aria-label="닫기" onclick="closeModal()">×</button>
-  <button class="prev" aria-label="이전 이미지" onclick="changeImage(-1)">❮</button>
-  <div class="modal-content">
-    <div id="modalCaption" aria-live="polite"></div>
-    <img id="modalImage" alt="">
-  </div>
-  <button class="next" aria-label="다음 이미지" onclick="changeImage(1)">❯</button>
-</div>
-
-  <script src="js/main.js" defer></script>
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(setupPortfolio, 250);
+            });
+            
+            setupPortfolio(); // 초기 실행
+        });
+    </script>
 </body>
 </html>
