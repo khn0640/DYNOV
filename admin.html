@@ -48,7 +48,17 @@
     </div>
   </nav>
 
-  <main class="wrap" id="app" aria-live="polite">
+  <section class="wrap panel" id="loginPanel">
+    <h1>관리자 로그인</h1>
+    <form id="loginForm">
+      <p><label>아이디 <input id="username" autocomplete="username" required /></label></p>
+      <p><label>비밀번호 <input id="password" type="password" autocomplete="current-password" required /></label></p>
+      <button class="btn" type="submit">로그인</button>
+      <p id="loginMessage" role="alert"></p>
+    </form>
+  </section>
+  <p class="wrap" id="adminMessage" role="status"></p>
+  <main hidden class="wrap" id="app" aria-live="polite">
     <header class="admin-nav">
       <div class="pill">문의 관리</div>
       <div class="row-actions">
@@ -80,11 +90,11 @@
       <!-- 우측: 목록 -->
       <section class="panel">
         <h3>문의 목록</h3>
-        <div id="listArea"></div>
+        <div id="listArea" style="overflow:auto"></div>
       </section>
     </section>
   </main>
 
-  <script src="admin.js"></script>
+  <script src="js/admin.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const elements = {};
+const element = key => elements[key] ||= {value:'',innerHTML:'',textContent:'',addEventListener(){},querySelectorAll(){return [];}};
+const context = vm.createContext({console, URL, Blob, setTimeout, localStorage:{removeItem(){}}, document:{querySelector:element,querySelectorAll:()=>[],addEventListener(){} }});
+vm.runInContext(fs.readFileSync('js/admin.js','utf8').replace(/boot\(\);\s*$/, ''),context);
+vm.runInContext(`
+__rows = [{id:'a',timestamp:'2025-01-01',projectType:['Brand'],toneMood:[],pages:'10',scope:'<img src=x onerror=alert(1)>',name:'Client',link:'javascript:alert(1)',status:'review',note:'" autofocus onfocus="alert(1)',version:0}];
+renderList(__rows);
+`,context);
+assert(!elements['#listArea'].innerHTML.includes('<img'));
+assert(!elements['#listArea'].innerHTML.includes('href="javascript:'));
+assert(elements['#listArea'].innerHTML.includes('&lt;img'));
+elements['#q'].value='unmatched'; vm.runInContext('renderList(__rows)',context);
+assert(elements['#listArea'].innerHTML.includes('데이터가 없습니다'));
+elements['#q'].value='client'; elements['#statusFilter'].value='review'; vm.runInContext('renderList(__rows)',context);
+assert(elements['#listArea'].innerHTML.includes('Client'));
+elements['#statusFilter'].value='done'; vm.runInContext('renderList(__rows)',context);
+assert(elements['#listArea'].innerHTML.includes('데이터가 없습니다'));
+assert.equal(vm.runInContext(`toCSV([['=HYPERLINK("evil")','한글','a,b','a"b','\\n+SUM(1)']])`,context), `"'=HYPERLINK(""evil"")","한글","a,b","a""b","'\n+SUM(1)"`);
+console.log('Client checks passed: escaping, URL validation, search, status filter, CSV formula protection.');

@@ -1,62 +1,41 @@
-/* ====== 환경 ====== */
-/** 1) 문의 수집용 WebApp은 inquiry.js에서 이미 사용 중 (POST)  */
-const FORM_POST_URL = '<<inquiry.js에 있는 기존 WebApp URL과 동일하게 사용>>';
-/** 2) 관리자 조회용 API (GAS에서 doGet으로 JSON 응답) */
-const ADMIN_LIST_URL = FORM_POST_URL + '?mode=list';   // 예: &sheet=Inquiry 같은 파라미터 추가 가능
-/** 3) 매우 단순한 패스코드 (배포 전 .env/서버로 이관 권장) */
-const ADMIN_PASSCODE = 'dynov-admin'; // TODO: 변경하세요
-
 /* ====== 유틸 ====== */
 const $ = (sel, el=document)=>el.querySelector(sel);
 const $$ = (sel, el=document)=>[...el.querySelectorAll(sel)];
 const fmt = (s)=> (s ?? '').toString().trim();
 const toCSV = (rows)=>{
-  const esc = v => `"${String(v ?? '').replace(/"/g,'""')}"`;
+  const esc = v => { let text = String(v ?? ''); if (/^[\s\u0000-\u001f]*[=+@-]/.test(text)) text = "'" + text; return `"${text.replace(/"/g,'""')}"`; };
   return rows.map(r=>r.map(esc).join(',')).join('\n');
 };
 
-/* ====== 인증(아주 라이트) ====== */
-(function authGate(){
-  const key = localStorage.getItem('dynov_admin_key');
-  if(key === ADMIN_PASSCODE) return;
-  const input = prompt('관리자 패스코드를 입력하세요');
-  if(input !== ADMIN_PASSCODE){
-    alert('접근 거부');
-    location.href = 'index.html';
-  }else{
-    localStorage.setItem('dynov_admin_key', ADMIN_PASSCODE);
+/* Server sessions only; legacy state remains available for manual backup. */
+let csrf = '';
+let authenticated = false;
+async function api(path, options = {}) {
+  const res = await fetch('/api/admin/' + path, {
+    ...options, credentials: 'same-origin', cache: 'no-store',
+    headers: {'Content-Type':'application/json', 'X-CSRF-Token':csrf}
+  });
+  if (res.status === 401) {
+    authenticated = false; __rows = []; renderList([]);
+    $('#loginPanel').hidden = false; $('#app').hidden = true;
   }
-})();
-
-/* ====== 상태 저장소(로컬) ======
-   - 서버 연동 전까지 브라우저에만 저장(간단·즉시)
-   - 키: inquiry:{timestamp or id}
-*/
-const store = {
-  key: 'dynov_admin_state_v1',
-  get(){ try{ return JSON.parse(localStorage.getItem(this.key)) || {}; } catch(e){ return {}; } },
-  set(data){ localStorage.setItem(this.key, JSON.stringify(data)); },
-  patch(id, partial){
-    const s = this.get(); s[id] = { ...(s[id]||{}), ...partial, updatedAt: new Date().toISOString() }; this.set(s);
-  },
-  getOne(id){ return this.get()[id] || {}; }
-};
-
-/* ====== 데이터 로드 ====== */
-async function fetchInquiries(){
-  // 가정: GAS doGet에서 JSON 배열 반환
-  // [{timestamp, projectType[], pages, scope, toneMood[], colorTone, customHex, budget, name, email, phone, channel, link, consent}]
-  // ※ 실제 컬럼은 inquiry.js의 collectPayload와 동일(프론트에서 POST)  :contentReference[oaicite:0]{index=0}
-  try{
-    const res = await fetch(ADMIN_LIST_URL, { cache:'no-store' });
-    if(!res.ok) throw new Error('응답 오류');
-    const json = await res.json();
-    return Array.isArray(json) ? json : (json.data || []);
-  }catch(e){
-    console.error(e);
-    alert('목록을 불러오지 못했습니다. (API 미구현/오류 가능)');
-    return [];
-  }
+  let data;
+  try { data = await res.json(); }
+  catch { throw new Error('관리자 API 응답을 확인할 수 없습니다. 서버 배포와 경로 설정을 확인하세요.'); }
+  if (!res.ok) throw new Error(data.error || '요청 실패');
+  return data;
+}
+const store = {getOne(id) { return __rows.find(r => String(r.id) === String(id)) || {}; }};
+const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const listValue = value => Array.isArray(value) ? value.map(String) : (value ? [String(value)] : []);
+function safeLink(value) {
+  try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) ? escapeHTML(u.href) : ''; }
+  catch { return ''; }
+}
+async function fetchInquiries() {
+  const json = await api('inquiries');
+  if (!Array.isArray(json.data)) throw new Error('목록 응답 형식 오류');
+  return json.data.map(r => ({...r, projectType:listValue(r.projectType), toneMood:listValue(r.toneMood), pages:String(r.pages ?? ''), scope:String(r.scope ?? '')}));
 }
 
 /* ====== 렌더 ====== */
@@ -95,31 +74,32 @@ function renderList(rows){
         ${filtered.map(r=>{
           const id = r.id || r.timestamp;
           const s = store.getOne(id);
+          const link = safeLink(r.link);
           return `
-            <tr data-id="${id}">
+            <tr data-id="${escapeHTML(id)}">
               <td>
-                <div>${new Date(r.timestamp).toLocaleString()}</div>
-                <div class="muted">${(r.projectType||[]).join(', ')}</div>
+                <div>${escapeHTML(new Date(r.timestamp).toLocaleString())}</div>
+                <div class="muted">${escapeHTML((r.projectType||[]).join(', '))}</div>
               </td>
               <td>
-                <div><strong>${(r.pages||'').replace(/\n/g,' ')}</strong></div>
-                <div class="muted" style="white-space:pre-wrap">${(r.scope||'').slice(0,500)}</div>
-                <div class="muted">톤무드: ${(r.toneMood||[]).join(', ')} · 팔레트: ${r.colorTone||'-'} · HEX: ${r.customHex||'-'}</div>
-                ${r.link ? `<div><a href="${r.link}" target="_blank" rel="noopener">참고링크</a></div>`:''}
+                <div><strong>${escapeHTML((r.pages||'').replace(/\n/g,' '))}</strong></div>
+                <div class="muted" style="white-space:pre-wrap">${escapeHTML((r.scope||'').slice(0,500))}</div>
+                <div class="muted">톤무드: ${escapeHTML((r.toneMood||[]).join(', '))} · 팔레트: ${escapeHTML(r.colorTone||'-')} · HEX: ${escapeHTML(r.customHex||'-')}</div>
+                ${link ? `<div><a href="${link}" target="_blank" rel="noopener">참고링크</a></div>`:''}
               </td>
               <td>
-                <div>${r.name||'-'}</div>
-                <div class="muted">${r.email||'-'} · ${r.phone||'-'} / ${r.channel||'-'}</div>
+                <div>${escapeHTML(r.name||'-')}</div>
+                <div class="muted">${escapeHTML(r.email||'-')} · ${escapeHTML(r.phone||'-')} / ${escapeHTML(r.channel||'-')}</div>
               </td>
               <td>
                 <div class="status">
                   <select class="js-status">
                     ${['','new','review','quote','hold','done'].map(v=>`<option value="${v}" ${s.status===v?'selected':''}>${v||'상태없음'}</option>`).join('')}
                   </select>
-                  <button class="btn js-save" title="상태 저장(로컬)">저장</button>
+                  <button class="btn js-save" title="상태 저장(서버)">저장</button>
                 </div>
                 <div style="margin-top:6px">
-                  <input class="js-note" placeholder="메모" value="${s.note?String(s.note).replace(/"/g,'&quot;'):''}" />
+                  <input class="js-note" placeholder="메모" value="${escapeHTML(s.note)}" />
                 </div>
               </td>
             </tr>
@@ -132,13 +112,19 @@ function renderList(rows){
 
   // 바인딩
   $$('#listArea .js-save').forEach(btn=>{
-    btn.addEventListener('click', e=>{
+    btn.addEventListener('click', async e=>{
       const tr = e.target.closest('tr'); const id = tr.dataset.id;
       const status = $('.js-status', tr).value;
       const note = $('.js-note', tr).value;
-      store.patch(id, { status, note });
-      btn.textContent = '저장됨';
-      setTimeout(()=> btn.textContent='저장', 800);
+      btn.disabled = true;
+      try {
+        const current = store.getOne(id);
+        const result = await api('inquiries/' + encodeURIComponent(id), {method:'PATCH', body:JSON.stringify({status,note,version:current.version})});
+        Object.assign(current, {status,note,version:result.version});
+        renderList(__rows);
+        $('#adminMessage').textContent = '저장되었습니다.';
+      } catch (error) { $('#adminMessage').textContent = error.message; }
+      finally { btn.disabled = false; }
     });
   });
 }
@@ -166,29 +152,49 @@ function exportCsv(rows){
       (s.status||'') + (s.note?`(${s.note})`:'' )
     ];
   });
-  const blob = new Blob([toCSV([header, ...data])], {type: 'text/csv;charset=utf-8;'});
+  const blob = new Blob(['\ufeff', toCSV([header, ...data])], {type: 'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `dynov_inquiries_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
 }
 
 /* ====== 부트 ====== */
 let __rows = [];
 async function boot(){
-  __rows = await fetchInquiries();
-  renderList(__rows);
+  $('#exportCsv').disabled = true;
+  try {
+    const session = await api('session'); csrf = session.csrf; authenticated = true;
+    $('#loginPanel').hidden = true; $('#app').hidden = false;
+    __rows = await fetchInquiries(); renderList(__rows);
+    $('#adminMessage').textContent = '';
+    $('#exportCsv').disabled = false;
+  } catch(error) { $('#adminMessage').textContent = error.message; }
 }
-boot();
-
+$('#loginForm').addEventListener('submit', async event => {
+  event.preventDefault();
+  try {
+    const session = await api('login', {method:'POST',body:JSON.stringify({username:$('#username').value,password:$('#password').value})});
+    csrf = session.csrf; $('#password').value = ''; await boot();
+  } catch(error) { $('#loginMessage').textContent = error.message; }
+});
 $('#refresh').addEventListener('click', boot);
-$('#exportCsv').addEventListener('click', ()=> exportCsv(__rows));
-$('#signOut').addEventListener('click', ()=>{
-  localStorage.removeItem('dynov_admin_key'); location.reload();
+$('#exportCsv').addEventListener('click', ()=> {if(authenticated) exportCsv(__rows);});
+$('#signOut').addEventListener('click', async ()=>{
+  try {
+    await api('logout', {method:'POST',body:'{}'});
+    csrf = ''; authenticated = false; __rows = []; renderList([]);
+    $('#loginPanel').hidden = false; $('#app').hidden = true;
+  } catch(error) { $('#adminMessage').textContent = error.message; }
 });
 $('#q').addEventListener('input', ()=> renderList(__rows));
 $('#statusFilter').addEventListener('change', ()=> renderList(__rows));
-document.addEventListener('keydown', (e)=>{
+document.addEventListener('keydown', e=>{
+  if (!authenticated || e.ctrlKey || e.metaKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable]')) return;
   if(e.key === '/') { e.preventDefault(); $('#q').focus(); }
   if(e.key.toLowerCase() === 'r'){ e.preventDefault(); $('#refresh').click(); }
 });
+// Discard obsolete credential only. Never delete legacy notes/status data automatically.
+try { localStorage.removeItem('dynov_admin_key'); } catch { /* Storage may be disabled. */ }
+boot();
