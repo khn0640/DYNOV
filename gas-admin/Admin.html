@@ -1,0 +1,31 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>
+body{background:#090909;color:#f5f5f5;font:14px system-ui;margin:0;padding:32px}main{max-width:1200px;margin:auto}h1{font-size:25px}button,input,select{background:#171717;color:white;border:1px solid #444;border-radius:8px;padding:9px}button{cursor:pointer}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border-bottom:1px solid #333;text-align:left;padding:12px;vertical-align:top}th{color:#aaa}input[type=search]{width:320px}.muted{color:#aaa}.note{width:190px}#error{color:#ff9292;white-space:pre-wrap}a{color:#eee}
+</style></head><body><main><h1>DYNOV · 문의 관리</h1><p class="muted">Google 계정으로 접근 제한된 관리자 화면</p><input type="search" id="search" placeholder="문의 검색"><button id="refresh">새로고침</button><button id="csv">CSV 다운로드</button><p id="error" role="alert"></p><div id="table">불러오는 중...</div></main><script>
+let rows=[];
+const $=s=>document.querySelector(s);
+function el(tag,text){const x=document.createElement(tag);if(text!==undefined)x.textContent=String(text??'');return x}
+function load(){ $('#error').textContent='';google.script.run.withSuccessHandler(data=>{rows=data;render()}).withFailureHandler(e=>{$('#error').textContent=e.message;$('#table').textContent='조회 실패'}).listInquiries()}
+function render(){
+ const q=$('#search').value.toLowerCase();
+ const visible=rows.filter(r=>Object.values(r).some(v=>String(v??'').toLowerCase().includes(q)));
+ const root=$('#table');root.replaceChildren();
+ if(!visible.length){root.textContent='문의가 없습니다.';return}
+ const table=el('table'),thead=el('thead'),tr=el('tr');
+ ['수신','프로젝트 / 요청','연락처','상태 / 메모'].forEach(t=>tr.append(el('th',t)));thead.append(tr);table.append(thead);
+ const tbody=el('tbody');
+ visible.forEach(r=>{
+  const tr=el('tr');
+  const td1=el('td',r.timestamp||'');
+  const td2=el('td');td2.append(el('strong',r.projectType||''),el('p',r.scope||''),el('p',r.pages||''));
+  const td3=el('td');td3.append(el('div',r.name||''),el('div',r.company||''),el('div',r.email||''),el('div',r.phone||''));
+  const td4=el('td'),select=el('select'),note=el('input'),save=el('button','저장');
+  ['new','review','quote','hold','done'].forEach(s=>{const opt=el('option',s);opt.value=s;select.append(opt)});
+  select.value=r.adminStatus||'new';note.className='note';note.value=r.adminNote||'';note.maxLength=2000;
+  save.addEventListener('click',()=>{save.disabled=true;google.script.run.withSuccessHandler(()=>{r.adminStatus=select.value;r.adminNote=note.value;save.textContent='저장됨';save.disabled=false}).withFailureHandler(e=>{$('#error').textContent=e.message;save.disabled=false}).updateInquiry(r.rowNumber,select.value,note.value)});
+  td4.append(select,note,save);tr.append(td1,td2,td3,td4);tbody.append(tr);
+ });table.append(tbody);root.append(table)
+}
+$('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);
+$('#csv').addEventListener('click',()=>{const keys=['timestamp','projectType','scope','name','company','email','phone','adminStatus','adminNote'];const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv=[keys.join(','),...rows.map(r=>keys.map(k=>esc(r[k])).join(','))].join('\r\n');const a=el('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='dynov-inquiries.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+load();
+</script></body></html>
