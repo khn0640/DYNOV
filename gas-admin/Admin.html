@@ -20,12 +20,12 @@ function render(){
   const td3=el('td');td3.append(el('div',r.name||''),el('div',r.company||''),el('div',r.email||''),el('div',r.phone||''));
   const td4=el('td'),select=el('select'),note=el('input'),save=el('button','저장');
   ['new','review','quote','hold','done'].forEach(s=>{const opt=el('option',s);opt.value=s;select.append(opt)});
-  select.value=r.adminStatus||'new';note.className='note';note.value=r.adminNote||'';note.maxLength=2000;
-  save.addEventListener('click',()=>{save.disabled=true;google.script.run.withSuccessHandler(()=>{r.adminStatus=select.value;r.adminNote=note.value;save.textContent='저장됨';save.disabled=false}).withFailureHandler(e=>{$('#error').textContent=e.message;save.disabled=false}).updateInquiry(r.rowNumber,select.value,note.value)});
+  select.value=r.status||'new';note.className='note';note.value=r.note||'';note.maxLength=2000;
+  save.addEventListener('click',()=>{save.disabled=true;google.script.run.withSuccessHandler(()=>{r.status=select.value;r.note=note.value;save.textContent='저장됨';save.disabled=false}).withFailureHandler(e=>{$('#error').textContent=e.message;save.disabled=false}).updateInquiry(r.id,select.value,note.value)});
   td4.append(select,note,save);tr.append(td1,td2,td3,td4);tbody.append(tr);
  });table.append(tbody);root.append(table)
 }
 $('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);
-$('#csv').addEventListener('click',()=>{const keys=['timestamp','projectType','scope','name','company','email','phone','adminStatus','adminNote'];const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv=[keys.join(','),...rows.map(r=>keys.map(k=>esc(r[k])).join(','))].join('\r\n');const a=el('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='dynov-inquiries.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+$('#csv').addEventListener('click',()=>{const keys=['timestamp','projectType','scope','name','company','email','phone','status','note'];const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv=[keys.join(','),...rows.map(r=>keys.map(k=>esc(r[k])).join(','))].join('\r\n');const a=el('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='dynov-inquiries.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
 load();
 </script></body></html>
