@@ -19,8 +19,8 @@ function render(){
   const td2=el('td');td2.append(el('strong',r.projectType||''),el('p',r.scope||''),el('p',r.pages||''));
   const td3=el('td');td3.append(el('div',r.name||''),el('div',r.company||''),el('div',r.email||''),el('div',r.phone||''));
   const td4=el('td'),select=el('select'),note=el('input'),save=el('button','저장');
-  ['new','review','quote','hold','done'].forEach(s=>{const opt=el('option',s);opt.value=s;select.append(opt)});
-  select.value=r.status||'new';note.className='note';note.value=r.note||'';note.maxLength=2000;
+  ['신규','검토중','견적발송','보류','완료'].forEach(s=>{const opt=el('option',s);opt.value=s;select.append(opt)});
+  select.value=r.status||'신규';note.className='note';note.value=r.note||'';note.maxLength=2000;
   save.addEventListener('click',()=>{save.disabled=true;google.script.run.withSuccessHandler(()=>{r.status=select.value;r.note=note.value;save.textContent='저장됨';save.disabled=false}).withFailureHandler(e=>{$('#error').textContent=e.message;save.disabled=false}).updateInquiry(r.id,select.value,note.value)});
   td4.append(select,note,save);tr.append(td1,td2,td3,td4);tbody.append(tr);
  });table.append(tbody);root.append(table)
