@@ -35,6 +35,11 @@ function listInquiries(){
   return r;
  }).filter(r=>r.id);
 }
+function checkConnection(){
+ const sheet=getSheet_();const headers=getHeaders_(sheet);
+ const required=[HEADERS.id,HEADERS.timestamp,HEADERS.scope,HEADERS.name,HEADERS.status];
+ return {sheetName:sheet.getName(),rowCount:sheet.getLastRow(),columns:sheet.getLastColumn(),missingHeaders:required.filter(h=>!headers.includes(h)),readOnly:true};
+}
 function updateInquiry(id,status,note){
  if(!ALLOWED_STATUS.includes(status))throw Error('허용되지 않은 상태입니다.');
  if(typeof note!=='string'||note.length>2000)throw Error('메모는 2000자 이하입니다.');
