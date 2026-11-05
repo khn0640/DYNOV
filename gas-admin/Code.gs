@@ -5,7 +5,7 @@
  */
 const SHEET_NAME='자동견적문의';
 const HEADERS={id:'의뢰번호',timestamp:'응답시간',projectType:'프로젝트유형',pages:'예상분량',scope:'작업범위',budget:'예산',name:'이름',company:'회사명',email:'이메일',phone:'전화번호',link:'자료링크',status:'상태',note:'관리자메모'};
-const ALLOWED_STATUS=['new','review','quote','hold','done'];
+const ALLOWED_STATUS=['신규','검토중','견적발송','보류','완료'];
 function doGet(){return HtmlService.createHtmlOutputFromFile('Admin').setTitle('DYNOV · 문의 관리').addMetaTag('viewport','width=device-width, initial-scale=1');}
 function getSheet_(){
  const id=PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
