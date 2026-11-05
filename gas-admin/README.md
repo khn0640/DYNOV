@@ -17,3 +17,10 @@
 - Google Sheets 공유 권한도 관리자만 유지하세요.
 - 이 구현은 시트의 행 번호를 사용하므로 행 정렬/삭제를 동시에 수행하는 환경에서는 안정적인 고유 ID 기반으로 보강해야 합니다.
 - 기존 시트의 열 이름 및 운영 배포 설정을 확인하기 전에는 실제 데이터로 검증되지 않았습니다.
+
+## 운영용 시트 후보 확인 (2026-11-05)
+- Google Drive에서 `inquiries` 스프레드시트 ID `1vKRp16m5qlFKFaRvjY91msH_Ee3XMaABAk3mOjNBK6Q` 발견.
+- 백업본과 탭 이름 및 시트 ID 일치. **실제 운영 연결 여부는 아직 미확인**.
+- 운영 Apps Script가 참조하는 ID를 확인한 후에만 Script Property `SPREADSHEET_ID`에 지정하세요.
+- 백업본 ID `1Ym3uWdxblvO4YQaSqZ7D21cPnVlSiwc49OX1rsGGlU0`는 연결하지 마세요.
+- 기존 `상태` 열은 견적 자동화와 공유될 수 있으므로 저장 동작을 운영 테스트 전에 검토해야 합니다.
